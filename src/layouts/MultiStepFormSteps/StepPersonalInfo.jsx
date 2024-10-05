@@ -1,14 +1,15 @@
-/* eslint-disable react/prop-types */
-import Input from "../Ui/Input";
+import Input from "../../components/Ui/Input";
 import {
   handleInputChange,
   handleFileChange,
-} from "../submitFormData/formFunctions";
+} from "../../services/registerFormUtils";
 
 const StepPersonalInfo = ({ formData, setFormData, formErrors }) => {
   return (
     <div className="space-y-10 ">
-      <h1 className="font-bold text-2xl text-center w-full text-main">Personal Information</h1>
+      <h1 className="font-bold text-2xl text-center w-full text-main">
+        Personal Information
+      </h1>
       <div>
         <Input
           label="enter full name"
@@ -18,7 +19,6 @@ const StepPersonalInfo = ({ formData, setFormData, formErrors }) => {
           onChange={(e) => handleInputChange(e, setFormData)}
           required
           errorMessage={formErrors.fullName}
-
         />
       </div>
       <div>
@@ -31,7 +31,6 @@ const StepPersonalInfo = ({ formData, setFormData, formErrors }) => {
           onChange={(e) => handleFileChange(e, setFormData)}
           required
           errorMessage={formErrors.photo}
-
         />
       </div>
       <div>
@@ -43,7 +42,6 @@ const StepPersonalInfo = ({ formData, setFormData, formErrors }) => {
           onChange={(e) => handleInputChange(e, setFormData)}
           required
           errorMessage={formErrors.mobile}
-
         />
       </div>
       <div>
@@ -56,20 +54,17 @@ const StepPersonalInfo = ({ formData, setFormData, formErrors }) => {
           onChange={(e) => handleInputChange(e, setFormData)}
           required
           errorMessage={formErrors.email}
-
         />
       </div>
       <div>
         <Input
           label="city Of Birth"
-
           id="cityOfBirth"
           name="cityOfBirth"
           value={formData.cityOfBirth}
           onChange={(e) => handleInputChange(e, setFormData)}
           required
           errorMessage={formErrors.cityOfBirth}
-
         />
       </div>
     </div>

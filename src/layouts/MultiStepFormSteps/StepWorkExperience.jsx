@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
-import Input from "../Ui/Input";
-import { handleInputChange } from "../submitFormData/formFunctions";
+import Input from "../../components/Ui/Input";
+import { handleInputChange } from "../../services/registerFormUtils";
 
-const StepWorkExperience = ({ formData, setFormData ,formErrors}) => {
+const StepWorkExperience = ({ formData, setFormData, formErrors }) => {
   return (
     <div className="space-y-4">
       <h1 className="font-bold text-2xl text-center w-full text-main">
