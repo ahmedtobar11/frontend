@@ -1,11 +1,10 @@
-import './App.css'
-
+import MultiStepForm from "./pages/MultiStepForm"
 function App() {
 
   return (
-    <div className='text-rose-600'>
-      Hello World
-    </div>
+    <>
+     <MultiStepForm/>
+    </>
   )
 }
 
