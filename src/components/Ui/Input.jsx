@@ -19,6 +19,7 @@ const Input = forwardRef(
       maxLength,
       pattern,
       readOnly = false,
+      onBlur,
       "aria-describedby": ariaDescribedBy,
     },
     ref
@@ -33,7 +34,7 @@ const Input = forwardRef(
           <div className="flex items-center justify-between mb-1.5">
             <label
               htmlFor={inputId}
-              className={`block text-sm font-medium ${
+              className={`block text-lg font-bold  ${
                 disabled ? "text-gray-400" : "text-gray-700"
               }`}
             >
@@ -65,24 +66,36 @@ const Input = forwardRef(
             maxLength={maxLength}
             pattern={pattern}
             readOnly={readOnly}
+            onBlur={onBlur}
             aria-invalid={!!errorMessage}
             aria-describedby={`${errorMessage ? errorId : ""} ${
               helpText ? helpTextId : ""
             } ${ariaDescribedBy || ""}`}
-            className={`
-            block w-full px-3 py-2 
-            border rounded-md shadow-sm 
-            text-sm
-            placeholder:text-gray-400
-            disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
-            ${
-              errorMessage
-                ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+            className={`${
+              type === "file"
+                ? `file:bg-gradient-to-b file:from-main-light
+                 file:to-red-400 file:px-6 file:py-3 file:mt-2 file:mr-5 file:border-none 
+                  
+                   file:text-black file:font-bold file:border-black file:rounded-md file:cursor-pointer
+                   
+                   cursor-pointer`
+                : type === "checkbox" || type === "radio"
+                ? "h-12 mt-1"
+                : `block w-full px-3 py-2 h-12
+                  border rounded-md shadow-sm 
+                  text-sm
+                 
+                  placeholder:text-gray-400
+                  disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
+                  ${
+                    errorMessage
+                      ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  }
+                  ${readOnly ? "bg-gray-50 cursor-default" : ""}
+                  focus:outline-none focus:ring-2 
+                  transition-colors duration-200`
             }
-            ${readOnly ? "bg-gray-50 cursor-default" : ""}
-            focus:outline-none focus:ring-2 
-            transition-colors duration-200
           `}
           />
           {type === "password" && value && (

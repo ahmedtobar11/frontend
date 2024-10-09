@@ -11,6 +11,7 @@ const MultiStepForm = () => {
     photo: null,
     mobile: "",
     email: "",
+    linkedin: "",
     cityOfBirth: "",
     faculty: "",
     university: "",
@@ -25,6 +26,8 @@ const MultiStepForm = () => {
     companyName: "",
     yearsOfExperience: "",
     isFreelancer: "",
+    isWork: "",
+    freeLancingGain: "",
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -47,9 +50,20 @@ const MultiStepForm = () => {
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
           errors.email = "Invalid email address";
         }
+        if (!formData.linkedin) {
+          errors.linkedin = "Required field";
+        } else if (
+          !/^https?:\/\/(www\.)?linkedin\.com\/.*$/.test(formData.linkedin)
+        ) {
+          errors.linkedin = "Invalid LinkedIn URL";
+        }
+        if (!formData.photo) {
+          errors.photo = "Required field";
+        }
         if (!formData.cityOfBirth) {
           errors.cityOfBirth = "Required field";
         }
+
         break;
 
       case 1:
@@ -74,18 +88,27 @@ const MultiStepForm = () => {
         if (!formData.preferredCourses) {
           errors.preferredCourses = "Required field";
         }
+
         break;
 
       case 3:
-        if (!formData.jobTitle) {
-          errors.jobTitle = "Required field";
+        if (formData.isWork) {
+          if (!formData.jobTitle) {
+            errors.jobTitle = "Required field";
+          }
+          if (!formData.companyName) {
+            errors.companyName = "Required field";
+          }
+          if (!formData.yearsOfExperience) {
+            errors.yearsOfExperience = "Required field";
+          }
         }
-        if (!formData.companyName) {
-          errors.companyName = "Required field";
+        if (formData.isFreelancer) {
+          if (!formData.freeLancingGain) {
+            errors.freeLancingGain = "Required field";
+          }
         }
-        if (!formData.yearsOfExperience) {
-          errors.yearsOfExperience = "Required field";
-        }
+
         break;
 
       default:
@@ -130,43 +153,72 @@ const MultiStepForm = () => {
         const response = await registerFormApiRequest.registerForm(
           graduateData
         );
-        console.log(response);
       }
     } catch (error) {
       console.log(error.message || "Error Submitting register form");
     }
   };
 
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+
+    const errors = validateStep(currentStep, { ...formData, [name]: value });
+
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: errors[name] || "",
+    }));
+  };
+
+  const handleSelectBlur = (name, value) => {
+    const errors = validateStep(currentStep, { ...formData, [name]: value });
+
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: errors[name] || "",
+    }));
+  };
   return (
     <div className="flex min-h-screen bg-gray-100 ">
-      <aside className="w-80 mr-6 space-y-12 bg-main-light px-2">
-        <StepIndicator currentStep={currentStep} />
-        <img src="logo.png" alt="logo" />
+      <aside className="w-80 mr-6 space-y-12 bg-main-light px-2 flex flex-col justify-between">
+        <StepIndicator currentStep={currentStep} formData={formData} />
+
+        <img className="self-center " src="logo.png" alt="logo" />
       </aside>
       <div className="flex-1 px-6 py-10 space-y-4">
-        <div className="min-h-px max-h-400px">
-          {renderStep(currentStep, formData, setFormData, formErrors)}
-        </div>
-        <div className="flex justify-between">
-          {currentStep > 0 && (
-            <Button
-              onClick={() => handlePrevious(setCurrentStep)}
-              text={"previous"}
-              variant={"outline"}
-            />
+        <div className="min-h-px  max-h-full">
+          {renderStep(
+            currentStep,
+            formData,
+            setFormData,
+            formErrors,
+            handleBlur,
+            handleSelectBlur
           )}
+        </div>
+        <div className="flex md:justify-between px-10 items-start gap-6 ">
+          <Button
+            onClick={() => handlePrevious(setCurrentStep)}
+            text={"Previous"}
+            variant={"outline"}
+            className={`${
+              currentStep > 0 ? " text-center   w-32" : "invisible"
+            } place-self-end`}
+          />
+
           {currentStep < steps.length - 1 ? (
             <Button
               onClick={() =>
                 handleNext(setCurrentStep, currentStep, formData, setFormErrors)
               }
               text={"NEXT"}
-              className="place-self-end"
+              className="place-self-end w-32 "
             />
           ) : (
             <Button
               onClick={() => handleSubmit(currentStep, formData, setFormErrors)}
               text={"Submit"}
+              className="place-self-end w-32 "
             />
           )}
         </div>

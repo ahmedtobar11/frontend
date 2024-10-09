@@ -19,6 +19,28 @@ export const handleInputChange = (e, setFormData) => {
   }));
 };
 
+export const handleSelectChange = (selectedOption, fieldName, setFormData) => {
+  setFormData((prevData) => ({
+    ...prevData,
+    [fieldName]: selectedOption?.value || "",
+  }));
+};
+
+export const handleMultiSelectChange = (
+  selectedOptions,
+  fieldName,
+  setFormData
+) => {
+  const newValues = selectedOptions
+    ? selectedOptions.map((option) => option.value)
+    : [];
+
+  setFormData((prevData) => ({
+    ...prevData,
+    [fieldName]: newValues,
+  }));
+};
+
 export const handleFileChange = (e, setFormData) => {
   const file = e.target.files[0];
   setFormData((prev) => ({
@@ -27,7 +49,14 @@ export const handleFileChange = (e, setFormData) => {
   }));
 };
 
-export const renderStep = (currentStep, formData, setFormData, formErrors) => {
+export const renderStep = (
+  currentStep,
+  formData,
+  setFormData,
+  formErrors,
+  handleBlur,
+  handleSelectBlur
+) => {
   switch (currentStep) {
     case 0:
       return (
@@ -35,6 +64,8 @@ export const renderStep = (currentStep, formData, setFormData, formErrors) => {
           formData={formData}
           setFormData={setFormData}
           formErrors={formErrors}
+          handleBlur={handleBlur}
+          handleSelectBlur={handleSelectBlur}
         />
       );
     case 1:
@@ -43,6 +74,8 @@ export const renderStep = (currentStep, formData, setFormData, formErrors) => {
           formData={formData}
           setFormData={setFormData}
           formErrors={formErrors}
+          handleBlur={handleBlur}
+          handleSelectBlur={handleSelectBlur}
         />
       );
     case 2:
@@ -51,6 +84,8 @@ export const renderStep = (currentStep, formData, setFormData, formErrors) => {
           formData={formData}
           setFormData={setFormData}
           formErrors={formErrors}
+          handleBlur={handleBlur}
+          handleSelectBlur={handleSelectBlur}
         />
       );
     case 3:
@@ -59,8 +94,11 @@ export const renderStep = (currentStep, formData, setFormData, formErrors) => {
           formData={formData}
           setFormData={setFormData}
           formErrors={formErrors}
+          handleBlur={handleBlur}
+          handleSelectBlur={handleSelectBlur}
         />
       );
+
     default:
       return null;
   }
