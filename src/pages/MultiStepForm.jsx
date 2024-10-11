@@ -3,7 +3,8 @@ import StepIndicator from "../components/Ui/StepIndicator";
 import { renderStep, steps } from "../services/registerFormUtils";
 import Button from "../components/Ui/Button";
 import registerFormApiRequest from "../services/apiRequests/registerFormApiRequest";
-import stepValidationSchemas from "../../utils/validations/graduationShema";
+import stepValidationSchemas from "../../utils/validations/graduationSchema";
+import Swal from "sweetalert2";
 const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const MultiStepForm = () => {
 
     //not done back
     linkedin: "",
-    isWork: false,
+    isEmployed: false,
     freeLancingGain: "",
   });
 
@@ -109,9 +110,22 @@ const MultiStepForm = () => {
         console.log("Submitted data:", formData);
 
         const response = await registerFormApiRequest.registerForm(formData);
+        Swal.fire({
+          title: "Thanks For Submit!",
+          text: "Your Registration Done Succesfully wait our answer !",
+          icon: "success",
+        }).then(() => {
+          window.location.reload();
+        });
+
         console.log(response);
       }
     } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: `There was an issue ${error.message} Try again`,
+        icon: "error",
+      });
       console.log(error.message || "Error Submitting register form");
     }
   };

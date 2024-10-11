@@ -20,7 +20,7 @@ const StepTeachingPreferences = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const Branches = await branchApiRequest.getAllbranchs();
+      const Branches = await branchApiRequest.getAllBranches();
       setBranches(Branches);
     };
 

@@ -30,9 +30,9 @@ const StepWorkExperience = ({
             value={formData.fullJobTitle}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
-            required={formData.isWork === true}
+            required={formData.isEmployed === true}
             errorMessage={formErrors.fullJobTitle}
-            disabled={formData.isWork === true ? false : true}
+            disabled={formData.isEmployed === true ? false : true}
           />
         </div>
         <div>
@@ -43,9 +43,9 @@ const StepWorkExperience = ({
             value={formData.companyName}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
-            required={formData.isWork === true}
+            required={formData.isEmployed === true}
             errorMessage={formErrors.companyName}
-            disabled={formData.isWork === true ? false : true}
+            disabled={formData.isEmployed === true ? false : true}
           />
         </div>
         <div>
@@ -56,10 +56,10 @@ const StepWorkExperience = ({
             value={formData.yearsOfExperience}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
-            required={formData.isWork === true}
+            required={formData.isEmployed === true}
             type="Number"
             errorMessage={formErrors.yearsOfExperience}
-            disabled={formData.isWork === true ? false : true}
+            disabled={formData.isEmployed === true ? false : true}
           />
         </div>
 
@@ -106,11 +106,11 @@ const StepWorkExperience = ({
           {
             <Input
               label="Have Work"
-              id="isWork"
-              name="isWork"
+              id="isEmployed"
+              name="isEmployed"
               type="checkbox"
               className="flex flex-row-reverse gap-2 mt-5  w-32 py-3"
-              checked={formData.isWork}
+              checked={formData.isEmployed}
               onChange={(e) => handleInputChange(e, setFormData)}
             />
           }

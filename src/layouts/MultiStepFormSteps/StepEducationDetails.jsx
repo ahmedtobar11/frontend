@@ -16,14 +16,14 @@ const StepEducationDetails = ({
   handleSelectBlur,
 }) => {
   const [tracks, setTracks] = useState([]);
-  const [branchs, setBranchs] = useState([]);
+  const [branches, setBranches] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const tracks = await tracksApiRequest.getAllTracks();
       setTracks(tracks);
 
-      const branchs = await branchApiRequest.getAllbranchs();
-      setBranchs(branchs);
+      const Branches = await branchApiRequest.getAllBranches();
+      setBranches(Branches);
     };
 
     fetchData();
@@ -41,9 +41,9 @@ const StepEducationDetails = ({
     value: intake.value,
     label: intake.label,
   }));
-  const optionsFactualy = Data.faculties?.map((facultie) => ({
-    value: facultie.value,
-    label: facultie.label,
+  const optionsFactualy = Data.faculties?.map((faculty) => ({
+    value: faculty.value,
+    label: faculty.label,
   }));
 
   const optionTrack = Array.from(
@@ -54,7 +54,7 @@ const StepEducationDetails = ({
   }));
 
   const optionbranch = Array.from(
-    new Set(branchs?.map((branch) => branch?.name))
+    new Set(branches?.map((branch) => branch?.name))
   ).map((name) => ({
     value: name,
     label: name,
