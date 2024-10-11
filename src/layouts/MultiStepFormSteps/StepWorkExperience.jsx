@@ -25,13 +25,13 @@ const StepWorkExperience = ({
         <div>
           <Input
             label="Job Title"
-            id="jobTitle"
-            name="jobTitle"
-            value={formData.jobTitle}
+            id="fullJobTitle"
+            name="fullJobTitle"
+            value={formData.fullJobTitle}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
-            // required={formData.isWork === true}
-            errorMessage={formErrors.jobTitle}
+            required={formData.isWork === true}
+            errorMessage={formErrors.fullJobTitle}
             disabled={formData.isWork === true ? false : true}
           />
         </div>
@@ -43,7 +43,7 @@ const StepWorkExperience = ({
             value={formData.companyName}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
-            //required={formData.isWork === true}
+            required={formData.isWork === true}
             errorMessage={formErrors.companyName}
             disabled={formData.isWork === true ? false : true}
           />
@@ -56,53 +56,64 @@ const StepWorkExperience = ({
             value={formData.yearsOfExperience}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
-            //required={formData.isWork === true}
+            required={formData.isWork === true}
+            type="Number"
             errorMessage={formErrors.yearsOfExperience}
             disabled={formData.isWork === true ? false : true}
           />
         </div>
 
         <div>
-          <SelectComponent
-            options={optionsFreelanceGain}
-            label="The Money You gained from Freelancing Jop"
-            onChange={(selectedOption) =>
-              handleSelectChange(selectedOption, "freeLancingGain", setFormData)
-            }
-            value={
-              optionsFreelanceGain?.find(
-                (option) => option.value === formData.freeLancingGain
-              ) || null
-            }
-            onBlur={() =>
-              handleSelectBlur("freeLancingGain", formData.freeLancingGain)
-            }
-            name="freeLancingGain"
-            placeholder="FreeLancing Gain"
-            //required={formData.isFreelancer === true}
-            errorMessage={formErrors.freeLancingGain}
-            disabled={formData.isFreelancer === true ? false : true}
-          />
+          {
+            <SelectComponent
+              options={optionsFreelanceGain}
+              label="The Money You gained from Freelancing Jop"
+              onChange={(selectedOption) =>
+                handleSelectChange(
+                  selectedOption,
+                  "freeLancingGain",
+                  setFormData
+                )
+              }
+              value={
+                optionsFreelanceGain?.find(
+                  (option) => option.value === formData.freeLancingGain
+                ) || null
+              }
+              onBlur={() =>
+                handleSelectBlur("freeLancingGain", formData.freeLancingGain)
+              }
+              name="freeLancingGain"
+              placeholder="FreeLancing Gain"
+              required={formData.isFreelancer === true}
+              errorMessage={formErrors.freeLancingGain}
+              disabled={
+                formData.workedAsFreelancerBefore === true ? false : true
+              }
+            />
+          }
         </div>
         <div className="md:flex gap-6 w-[290px]  items-end">
           <Input
             label="Is Freelancer"
-            id="isFreelancer"
-            name="isFreelancer"
+            id="workedAsFreelancerBefore"
+            name="workedAsFreelancerBefore"
             type="checkbox"
             className="flex flex-row-reverse gap-2  w-32 py-3"
-            checked={formData.isFreelancer}
+            checked={formData.workedAsFreelancerBefore}
             onChange={(e) => handleInputChange(e, setFormData)}
           />
-          <Input
-            label="Have Work"
-            id="isWork"
-            name="isWork"
-            type="checkbox"
-            className="flex flex-row-reverse gap-2 mt-5  w-32 py-3"
-            checked={formData.isWork}
-            onChange={(e) => handleInputChange(e, setFormData)}
-          />
+          {
+            <Input
+              label="Have Work"
+              id="isWork"
+              name="isWork"
+              type="checkbox"
+              className="flex flex-row-reverse gap-2 mt-5  w-32 py-3"
+              checked={formData.isWork}
+              onChange={(e) => handleInputChange(e, setFormData)}
+            />
+          }
         </div>
       </div>
     </div>

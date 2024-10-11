@@ -2,7 +2,6 @@ import StepPersonalInfo from "../layouts/MultiStepFormSteps/StepPersonalInfo";
 import StepEducationDetails from "../layouts/MultiStepFormSteps/StepEducationDetails";
 import StepTeachingPreferences from "../layouts/MultiStepFormSteps/StepTeachingPreferences";
 import StepWorkExperience from "../layouts/MultiStepFormSteps/StepWorkExperience";
-import registerFormApiRequest from "./apiRequests/registerFormApiRequest";
 
 export const steps = [
   "Personal Information",
@@ -37,7 +36,7 @@ export const handleMultiSelectChange = (
 
   setFormData((prevData) => ({
     ...prevData,
-    [fieldName]: newValues,
+    [fieldName]: Array.isArray(newValues) ? newValues : [],
   }));
 };
 
@@ -45,7 +44,7 @@ export const handleFileChange = (e, setFormData) => {
   const file = e.target.files[0];
   setFormData((prev) => ({
     ...prev,
-    photo: file,
+    personalPhoto: file.name,
   }));
 };
 

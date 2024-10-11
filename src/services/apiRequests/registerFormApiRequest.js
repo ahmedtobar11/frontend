@@ -1,15 +1,7 @@
-import axios from "axios";
+import apiInstance from "../interceptor/axiosInstance";
 
 const registerForm = async (graduateData) => {
-  const response = await axios.post(
-    "http://localhost:8080/api/v1/",
-    graduateData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
+  const response = await apiInstance.post("grads", graduateData);
   return response;
 };
 
