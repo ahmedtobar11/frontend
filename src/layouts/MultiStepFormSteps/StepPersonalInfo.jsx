@@ -62,51 +62,62 @@ const StepPersonalInfo = ({
             errorMessage={formErrors.email}
           />
         </div>
-        <div>
-          <Input
-            label="Linked in"
-            id="linkedin"
-            name="linkedin"
-            type="linkedin"
-            value={formData.linkedin}
-            onChange={(e) => handleInputChange(e, setFormData)}
-            onBlur={(e) => handleBlur(e)}
-            required
-            errorMessage={formErrors.linkedin}
-          />
-        </div>
+        {
+          <div>
+            <Input
+              label="Linked in"
+              id="linkedin"
+              name="linkedin"
+              type="linkedin"
+              value={formData.linkedin}
+              onChange={(e) => handleInputChange(e, setFormData)}
+              onBlur={(e) => handleBlur(e)}
+              required
+              errorMessage={formErrors.linkedin}
+            />
+          </div>
+        }
         <div>
           <SelectComponent
             options={options}
             label="City Of Birth"
             onChange={(selectedOption) =>
-              handleSelectChange(selectedOption, "cityOfBirth", setFormData)
+              handleSelectChange(
+                selectedOption,
+                "cityOfBirthplace",
+                setFormData
+              )
             }
-            onBlur={() => handleSelectBlur("cityOfBirth", formData.cityOfBirth)}
+            onBlur={() =>
+              handleSelectBlur("cityOfBirthplace", formData.cityOfBirthplace)
+            }
             value={
               options.find(
-                (option) => option.value === formData.cityOfBirth
-              ) || { value: formData.cityOfBirth, label: formData.cityOfBirth }
+                (option) => option.value === formData.cityOfBirthplace
+              ) || {
+                value: formData.cityOfBirthplace,
+                label: formData.cityOfBirthplace,
+              }
             }
-            name="cityOfBirth"
+            name="cityOfBirthplace"
             placeholder="City Of Birth"
             isCreatable
             required
-            errorMessage={formErrors.cityOfBirth}
+            errorMessage={formErrors.cityOfBirthplace}
           />
         </div>
 
         <div>
           <Input
             label="Person image"
-            id="photo"
-            name="photo"
+            id="personalPhoto"
+            name="personalPhoto"
             type="file"
             accept="image/*"
             onChange={(e) => handleFileChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required
-            errorMessage={formErrors.photo}
+            errorMessage={formErrors.personalPhoto}
           />
         </div>
       </div>
