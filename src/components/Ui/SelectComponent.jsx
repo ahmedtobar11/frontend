@@ -48,11 +48,12 @@ function SelectComponent(props) {
         <label
           className={`${
             disabled ? "text-gray-400" : "text-text"
-          } block  text-lg font-bold mb-1`}
+          } block text-lg font-bold mb-1`}
         >
-          {label}
+          {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
+
       {isCreatable ? (
         <Creatable
           options={options}

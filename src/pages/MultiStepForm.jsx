@@ -12,26 +12,24 @@ const MultiStepForm = () => {
     personalPhoto: null,
     mobile: "",
     email: "",
-    cityOfBirthplace: "",
+    cityOfBirth: "",
     faculty: "",
     university: "",
     trackName: "",
     branch: "",
-    graduationYearFromIti: "",
-    branchesYouCanTeachIn: "",
+    itiGraduationYear: "",
+    preferredTeachingBranches: [],
     preferredCoursesToTeach: "",
     fullJobTitle: "",
     companyName: "",
     yearsOfExperience: 0,
-    workedAsFreelancerBefore: false,
+    hasFreelanceExperience: false,
     program: "",
     intake: "",
     interestedInTeaching: "",
-
-    //not done back
     linkedin: "",
     isEmployed: false,
-    freeLancingGain: "",
+    freelancingIncome: 0,
   });
 
   const [formErrors, setFormErrors] = useState({});

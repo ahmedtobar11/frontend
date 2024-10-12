@@ -1,7 +1,7 @@
 import apiInstance from "../interceptor/axiosInstance";
 
 const registerForm = async (graduateData) => {
-  const response = await apiInstance.post("grads", graduateData);
+  const response = await apiInstance.post("graduates", graduateData);
   return response;
 };
 
