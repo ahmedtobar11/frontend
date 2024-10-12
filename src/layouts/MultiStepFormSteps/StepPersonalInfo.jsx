@@ -26,9 +26,10 @@ const StepPersonalInfo = ({
       <div className=" w-max-xl px-10">
         <div>
           <Input
-            label=" Full Name"
+            label="Full Name"
             id="fullName"
             name="fullName"
+            placeholder="Enter your full name"
             value={formData.fullName}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
@@ -42,6 +43,7 @@ const StepPersonalInfo = ({
             label="Mobile"
             id="mobile"
             name="mobile"
+            placeholder="Enter your mobile number"
             value={formData.mobile}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
@@ -55,6 +57,7 @@ const StepPersonalInfo = ({
             id="email"
             name="email"
             type="email"
+            placeholder="Enter your email address"
             value={formData.email}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
@@ -62,54 +65,44 @@ const StepPersonalInfo = ({
             errorMessage={formErrors.email}
           />
         </div>
-        {
-          <div>
-            <Input
-              label="Linked in"
-              id="linkedin"
-              name="linkedin"
-              type="linkedin"
-              value={formData.linkedin}
-              onChange={(e) => handleInputChange(e, setFormData)}
-              onBlur={(e) => handleBlur(e)}
-              required
-              errorMessage={formErrors.linkedin}
-            />
-          </div>
-        }
+
+        <div>
+          <Input
+            label="LinkedIn"
+            id="linkedin"
+            name="linkedin"
+            type="linkedin"
+            placeholder="Enter your LinkedIn profile URL"
+            value={formData.linkedin}
+            onChange={(e) => handleInputChange(e, setFormData)}
+            onBlur={(e) => handleBlur(e)}
+            errorMessage={formErrors.linkedin}
+          />
+        </div>
+
         <div>
           <SelectComponent
             options={options}
             label="City Of Birth"
             onChange={(selectedOption) =>
-              handleSelectChange(
-                selectedOption,
-                "cityOfBirthplace",
-                setFormData
-              )
+              handleSelectChange(selectedOption, "cityOfBirth", setFormData)
             }
-            onBlur={() =>
-              handleSelectBlur("cityOfBirthplace", formData.cityOfBirthplace)
-            }
+            onBlur={() => handleSelectBlur("cityOfBirth", formData.cityOfBirth)}
             value={
-              options.find(
-                (option) => option.value === formData.cityOfBirthplace
-              ) || {
-                value: formData.cityOfBirthplace,
-                label: formData.cityOfBirthplace,
-              }
+              options.find((option) => option.value === formData.cityOfBirth) ||
+              null
             }
-            name="cityOfBirthplace"
-            placeholder="City Of Birth"
+            name="cityOfBirth"
+            placeholder="Select your city of birth"
             isCreatable
             required
-            errorMessage={formErrors.cityOfBirthplace}
+            errorMessage={formErrors.cityOfBirth}
           />
         </div>
 
         <div>
           <Input
-            label="Person image"
+            label="Personal Photo"
             id="personalPhoto"
             name="personalPhoto"
             type="file"

@@ -66,68 +66,67 @@ const StepEducationDetails = ({
       </h1>
       <div className="w-max-xl md:px-10 pb-5">
         <div>
-          <SelectComponent
-            options={optionsUniversity}
-            label="University"
-            onChange={(selectedOption) =>
-              handleSelectChange(selectedOption, "university", setFormData)
-            }
-            onBlur={() => handleSelectBlur("university", formData.university)}
-            value={
-              optionsUniversity.find(
-                (option) => option.value === formData.university
-              ) || { value: formData.university, label: formData.university }
-            }
-            name="university"
-            placeholder="university"
-            isCreatable
-            required
-            errorMessage={formErrors.university}
-          />
-        </div>
-
-        <div>
-          <SelectComponent
-            options={optionsFactualy}
-            label="Faculty"
-            onChange={(selectedOption) =>
-              handleSelectChange(selectedOption, "faculty", setFormData)
-            }
-            onBlur={() => handleSelectBlur("faculty", formData.faculty)}
-            value={
-              optionsFactualy.find(
-                (option) => option.value === formData.faculty
-              ) || {
-                value: formData.faculty,
-                label: formData.faculty,
+          <div>
+            <SelectComponent
+              options={optionsUniversity}
+              label="University"
+              onChange={(selectedOption) =>
+                handleSelectChange(selectedOption, "university", setFormData)
               }
-            }
-            name="faculty"
-            placeholder="faculty"
-            isCreatable
-            required
-            errorMessage={formErrors.faculty}
-          />
-        </div>
+              onBlur={() => handleSelectBlur("university", formData.university)}
+              value={
+                optionsUniversity.find(
+                  (option) => option.value === formData.university
+                ) || null
+              }
+              name="university"
+              placeholder="Select your university"
+              isCreatable
+              required
+              errorMessage={formErrors.university}
+            />
+          </div>
 
-        <div>
-          <SelectComponent
-            options={optionbranch}
-            label="Branch you have Gradute from"
-            onChange={(selectedOption) =>
-              handleSelectChange(selectedOption, "branch", setFormData)
-            }
-            onBlur={() => handleSelectBlur("branch", formData.branch)}
-            value={
-              optionbranch?.find(
-                (option) => option.value === formData.branch
-              ) || null
-            }
-            name="branch"
-            placeholder="branch"
-            required
-            errorMessage={formErrors.branch}
-          />
+          <div>
+            <SelectComponent
+              options={optionsFactualy}
+              label="Faculty"
+              onChange={(selectedOption) =>
+                handleSelectChange(selectedOption, "faculty", setFormData)
+              }
+              onBlur={() => handleSelectBlur("faculty", formData.faculty)}
+              value={
+                optionsFactualy.find(
+                  (option) => option.value === formData.faculty
+                ) || null
+              }
+              name="faculty"
+              placeholder="Select your faculty"
+              isCreatable
+              required
+              errorMessage={formErrors.faculty}
+            />
+          </div>
+
+          <div>
+            <SelectComponent
+              options={optionbranch}
+              label="Iti branch you Graduted from"
+              onChange={(selectedOption) =>
+                handleSelectChange(selectedOption, "branch", setFormData)
+              }
+              onBlur={() => handleSelectBlur("branch", formData.branch)}
+              value={
+                optionbranch?.find(
+                  (option) => option.value === formData.branch
+                ) || null
+              }
+              name="branch"
+              placeholder="Select your ITI branch"
+              required
+              errorMessage={formErrors.branch}
+            />
+          </div>
 
           <div>
             <SelectComponent
@@ -143,7 +142,7 @@ const StepEducationDetails = ({
                 ) || null
               }
               name="trackName"
-              placeholder="trackName"
+              placeholder="Select your track"
               required
               errorMessage={formErrors.trackName}
             />
@@ -163,15 +162,16 @@ const StepEducationDetails = ({
                 ) || null
               }
               name="program"
-              placeholder="program"
+              placeholder="Select your program"
               required
               errorMessage={formErrors.program}
             />
           </div>
+
           <div>
             <SelectComponent
               options={optionsIntake}
-              label="intake"
+              label="Intake"
               onChange={(selectedOption) =>
                 handleSelectChange(selectedOption, "intake", setFormData)
               }
@@ -182,7 +182,7 @@ const StepEducationDetails = ({
                 ) || null
               }
               name="intake"
-              placeholder="intake"
+              placeholder="Select your intake"
               required
               errorMessage={formErrors.intake}
             />
@@ -191,13 +191,14 @@ const StepEducationDetails = ({
           <div>
             <Input
               label=" Graduation Year From ITI"
-              id="graduationYearFromIti"
-              name="graduationYearFromIti"
-              value={formData.graduationYearFromIti}
+              id="itiGraduationYear"
+              name="itiGraduationYear"
+              value={formData.itiGraduationYear}
+              placeholder="Enter your ITI graduation year"
               onChange={(e) => handleInputChange(e, setFormData)}
               onBlur={(e) => handleBlur(e)}
               required
-              errorMessage={formErrors.graduationYearFromIti}
+              errorMessage={formErrors.itiGraduationYear}
               type="Number"
             />
           </div>
