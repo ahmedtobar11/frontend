@@ -5,9 +5,8 @@ import {
 } from "../../services/registerFormUtils";
 import Data from "../../SelectOption.json";
 import SelectComponent from "../../components/Ui/SelectComponent";
-import tracksApiRequest from "../../services/apiRequests/tracksApiRequest";
-import { useEffect, useState } from "react";
-import branchApiRequest from "../../services/apiRequests/branchApiRequest";
+import { useBranchesAndTracks } from "../../contexts/BranchesAndTracksContext";
+
 const StepEducationDetails = ({
   formData,
   setFormData,
@@ -15,19 +14,7 @@ const StepEducationDetails = ({
   handleBlur,
   handleSelectBlur,
 }) => {
-  const [tracks, setTracks] = useState([]);
-  const [branches, setBranches] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const tracks = await tracksApiRequest.getAllTracks();
-      setTracks(tracks);
-
-      const Branches = await branchApiRequest.getAllBranches();
-      setBranches(Branches);
-    };
-
-    fetchData();
-  }, []);
+  const { tracks, branches } = useBranchesAndTracks();
 
   const optionsUniversity = Data.Universities?.map((university) => ({
     value: university.value,

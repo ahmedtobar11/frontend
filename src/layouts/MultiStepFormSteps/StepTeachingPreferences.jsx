@@ -6,8 +6,7 @@ import {
 } from "../../services/registerFormUtils";
 import Data from "../../SelectOption.json";
 import SelectComponent from "../../components/Ui/SelectComponent";
-import { useEffect, useState } from "react";
-import branchApiRequest from "../../services/apiRequests/branchApiRequest";
+import { useBranchesAndTracks } from "../../contexts/BranchesAndTracksContext";
 
 const StepTeachingPreferences = ({
   formData,
@@ -16,16 +15,7 @@ const StepTeachingPreferences = ({
   handleBlur,
   handleSelectBlur,
 }) => {
-  const [branches, setBranches] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const Branches = await branchApiRequest.getAllBranches();
-      setBranches(Branches);
-    };
-
-    fetchData();
-  }, []);
+  const { branches } = useBranchesAndTracks();
 
   const optionsinterestedInTeaching = Data.interestedInTeaching?.map(
     (interestedInTeaching) => ({

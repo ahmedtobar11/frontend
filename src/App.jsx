@@ -1,11 +1,13 @@
-import MultiStepForm from "./pages/MultiStepForm"
+import { BranchesAndTracksProvider } from "./contexts/BranchesAndTracksContext";
+import MultiStepForm from "./pages/MultiStepForm";
 function App() {
-
   return (
     <>
-     <MultiStepForm/>
+      <BranchesAndTracksProvider>
+        <MultiStepForm />
+      </BranchesAndTracksProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
