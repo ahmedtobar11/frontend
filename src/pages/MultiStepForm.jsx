@@ -151,7 +151,7 @@ const MultiStepForm = () => {
       <aside className="w-80 mr-6 space-y-12 bg-main-light px-2 flex flex-col justify-between">
         <StepIndicator currentStep={currentStep} formData={formData} />
 
-        <img className="self-center " src="logo.png" alt="logo" />
+        <img className="self-center" src="logo.png" alt="logo" />
       </aside>
       <div className="flex-1 px-6 py-10 space-y-4">
         <div className="min-h-px  max-h-full">
@@ -170,7 +170,7 @@ const MultiStepForm = () => {
             text={"Previous"}
             variant={"outline"}
             className={`${
-              currentStep > 0 ? " text-center   w-32" : "invisible"
+              currentStep > 0 ? "text-center w-32" : "invisible"
             } place-self-end`}
             disabled={isSubmitting}
           />

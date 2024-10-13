@@ -15,7 +15,7 @@ const Button = ({
   };
   const variantClasses = {
     fill: "bg-main text-white p-4 ",
-    outline: " border  border-main text-main  p-4",
+    outline: "border  border-main text-main  p-4",
   };
 
   const disabledClasses = disabled

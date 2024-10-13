@@ -177,7 +177,7 @@ const StepEducationDetails = ({
 
           <div>
             <Input
-              label=" Graduation Year From ITI"
+              label="Graduation Year From ITI"
               id="itiGraduationYear"
               name="itiGraduationYear"
               value={formData.itiGraduationYear}

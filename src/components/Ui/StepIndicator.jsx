@@ -3,7 +3,7 @@ import { steps } from "../../services/registerFormUtils";
 
 const StepIndicator = ({ currentStep }) => {
   return (
-    <div className=" rounded-lg py-10 px-6  w-full  text-xl text-nowrap bg-transparent">
+    <div className="rounded-lg py-10 px-6  w-full  text-xl text-nowrap bg-transparent">
       <div className="space-y-10 ">
         {steps.map((step, index) => (
           <div

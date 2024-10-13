@@ -32,7 +32,7 @@ const StepTeachingPreferences = ({
   }));
 
   return (
-    <div className=" space-y-12">
+    <div className="space-y-12">
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Teaching Preferences
       </h1>

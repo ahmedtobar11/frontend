@@ -23,7 +23,7 @@ const StepPersonalInfo = ({
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Personal Information
       </h1>
-      <div className=" w-max-xl px-10">
+      <div className="w-max-xl px-10">
         <div>
           <Input
             label="Full Name"
