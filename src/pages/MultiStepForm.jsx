@@ -2,9 +2,10 @@ import { useState } from "react";
 import StepIndicator from "../components/Ui/StepIndicator";
 import { renderStep, steps } from "../services/registerFormUtils";
 import Button from "../components/Ui/Button";
-import registerFormApiRequest from "../services/apiRequests/registerFormApiRequest";
+import registrationApiRequest from "../services/apiRequests/registrationApiRequest";
 import stepValidationSchemas from "../../utils/validations/graduationSchema";
 import Swal from "sweetalert2";
+
 const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -33,6 +34,7 @@ const MultiStepForm = () => {
   });
 
   const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateStep = async (currentStep, formData) => {
     try {
@@ -97,6 +99,17 @@ const MultiStepForm = () => {
   };
 
   const handleSubmit = async (currentStep, formData, setFormErrors) => {
+    setIsSubmitting(true);
+    const loadingSwal = Swal.fire({
+      title: "Submitting...",
+      text: "Please wait while we process your registration.",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      showConfirmButton: false,
+      allowOutsideClick: false,
+    });
+
     try {
       const errors = await validateStep(currentStep, formData);
       if (Object.keys(errors).length > 0) {
@@ -105,12 +118,14 @@ const MultiStepForm = () => {
       }
 
       if (currentStep === steps.length - 1) {
-        console.log("Submitted data:", formData);
+        const response = await registrationApiRequest.createRegistrationRequest(
+          formData
+        );
 
-        const response = await registerFormApiRequest.registerForm(formData);
+        loadingSwal.close();
         Swal.fire({
           title: "Thanks For Submit!",
-          text: "Your Registration Done Succesfully wait our answer !",
+          text: "Your Registration Done Successfully. Please wait for our answer!",
           icon: "success",
         }).then(() => {
           window.location.reload();
@@ -119,14 +134,18 @@ const MultiStepForm = () => {
         console.log(response);
       }
     } catch (error) {
+      loadingSwal.close();
       Swal.fire({
         title: "Error!",
-        text: `There was an issue ${error.message} Try again`,
+        text: `There was an issue: ${error.message}. Please try again.`,
         icon: "error",
       });
       console.log(error.message || "Error Submitting register form");
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
   return (
     <div className="flex min-h-screen bg-gray-100 ">
       <aside className="w-80 mr-6 space-y-12 bg-main-light px-2 flex flex-col justify-between">
@@ -153,6 +172,7 @@ const MultiStepForm = () => {
             className={`${
               currentStep > 0 ? " text-center   w-32" : "invisible"
             } place-self-end`}
+            disabled={isSubmitting}
           />
 
           {currentStep < steps.length - 1 ? (
@@ -162,12 +182,14 @@ const MultiStepForm = () => {
               }
               text={"NEXT"}
               className="place-self-end w-32 "
+              disabled={isSubmitting}
             />
           ) : (
             <Button
               onClick={() => handleSubmit(currentStep, formData, setFormErrors)}
               text={"Submit"}
               className="place-self-end w-32 "
+              disabled={isSubmitting}
             />
           )}
         </div>
