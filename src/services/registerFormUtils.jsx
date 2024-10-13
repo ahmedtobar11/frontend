@@ -41,10 +41,10 @@ export const handleMultiSelectChange = (
 };
 
 export const handleFileChange = (e, setFormData) => {
-  const file = e.target.files[0];
+  const file = e.currentTarget.files[0];
   setFormData((prev) => ({
     ...prev,
-    personalPhoto: file.name,
+    personalPhoto: file,
   }));
 };
 
