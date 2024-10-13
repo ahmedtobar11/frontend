@@ -12,7 +12,7 @@ const StepWorkExperience = ({
   handleBlur,
   handleSelectBlur,
 }) => {
-  const optionsFreelanceGain = Data.FreeLanceGain?.map((gain) => ({
+  const optionsFreelancingIncome = Data.FreelancingIncome?.map((gain) => ({
     value: gain.value,
     label: gain.label,
   }));
@@ -27,6 +27,7 @@ const StepWorkExperience = ({
             label="Job Title"
             id="fullJobTitle"
             name="fullJobTitle"
+            placeholder="Enter your job title"
             value={formData.fullJobTitle}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
@@ -40,6 +41,7 @@ const StepWorkExperience = ({
             label="Company Name"
             id="companyName"
             name="companyName"
+            placeholder="Enter your company name"
             value={formData.companyName}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
@@ -50,14 +52,15 @@ const StepWorkExperience = ({
         </div>
         <div>
           <Input
-            label="years Of Experience"
+            label="Years of Experience"
             id="yearsOfExperience"
             name="yearsOfExperience"
+            placeholder="Enter your number years of experience"
             value={formData.yearsOfExperience}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
-            type="Number"
+            type="number"
             errorMessage={formErrors.yearsOfExperience}
             disabled={formData.isEmployed === true ? false : true}
           />
@@ -66,41 +69,42 @@ const StepWorkExperience = ({
         <div>
           {
             <SelectComponent
-              options={optionsFreelanceGain}
-              label="The Money You gained from Freelancing Jop"
+              options={optionsFreelancingIncome}
+              label="You Freelancing Income"
               onChange={(selectedOption) =>
                 handleSelectChange(
                   selectedOption,
-                  "freeLancingGain",
+                  "freelancingIncome",
                   setFormData
                 )
               }
               value={
-                optionsFreelanceGain?.find(
-                  (option) => option.value === formData.freeLancingGain
+                optionsFreelancingIncome?.find(
+                  (option) => option.value === formData.freelancingIncome
                 ) || null
               }
               onBlur={() =>
-                handleSelectBlur("freeLancingGain", formData.freeLancingGain)
+                handleSelectBlur(
+                  "freelancingIncome",
+                  formData.freelancingIncome
+                )
               }
-              name="freeLancingGain"
-              placeholder="FreeLancing Gain"
+              name="freelancingIncome"
+              placeholder="FreeLancing Income"
               required={formData.isFreelancer === true}
-              errorMessage={formErrors.freeLancingGain}
-              disabled={
-                formData.workedAsFreelancerBefore === true ? false : true
-              }
+              errorMessage={formErrors.freelancingIncome}
+              disabled={formData.hasFreelanceExperience === true ? false : true}
             />
           }
         </div>
         <div className="md:flex gap-6 w-[290px]  items-end">
           <Input
-            label="Is Freelancer"
-            id="workedAsFreelancerBefore"
-            name="workedAsFreelancerBefore"
+            label="Freelancer"
+            id="hasFreelanceExperience"
+            name="hasFreelanceExperience"
             type="checkbox"
             className="flex flex-row-reverse gap-2  w-32 py-3"
-            checked={formData.workedAsFreelancerBefore}
+            checked={formData.hasFreelanceExperience}
             onChange={(e) => handleInputChange(e, setFormData)}
           />
           {

@@ -6,8 +6,7 @@ import {
 } from "../../services/registerFormUtils";
 import Data from "../../SelectOption.json";
 import SelectComponent from "../../components/Ui/SelectComponent";
-import { useEffect, useState } from "react";
-import branchApiRequest from "../../services/apiRequests/branchApiRequest";
+import { useBranchesAndTracks } from "../../contexts/BranchesAndTracksContext";
 
 const StepTeachingPreferences = ({
   formData,
@@ -16,16 +15,7 @@ const StepTeachingPreferences = ({
   handleBlur,
   handleSelectBlur,
 }) => {
-  const [branches, setBranches] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const Branches = await branchApiRequest.getAllBranches();
-      setBranches(Branches);
-    };
-
-    fetchData();
-  }, []);
+  const { branches } = useBranchesAndTracks();
 
   const optionsinterestedInTeaching = Data.interestedInTeaching?.map(
     (interestedInTeaching) => ({
@@ -42,7 +32,7 @@ const StepTeachingPreferences = ({
   }));
 
   return (
-    <div className=" space-y-12">
+    <div className="space-y-12">
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Teaching Preferences
       </h1>
@@ -50,28 +40,28 @@ const StepTeachingPreferences = ({
         <div>
           <SelectComponent
             options={optionBranchWantteach}
-            label="Which Teaching Branches You Prefer"
+            label="Preferred Teaching Branches"
             onChange={(selectedOption) =>
               handleMultiSelectChange(
                 selectedOption,
-                "branchesYouCanTeachIn",
+                "preferredTeachingBranches",
                 setFormData
               )
             }
             onBlur={() =>
               handleSelectBlur(
-                "branchesYouCanTeachIn",
-                formData.branchesYouCanTeachIn
+                "preferredTeachingBranches",
+                formData.preferredTeachingBranches
               )
             }
             value={
-              formData?.branchesYouCanTeachIn
+              formData?.preferredTeachingBranches
                 ? optionBranchWantteach
                     .filter((option) =>
-                      formData.branchesYouCanTeachIn.includes(option.value)
+                      formData.preferredTeachingBranches.includes(option.value)
                     )
                     .concat(
-                      formData.branchesYouCanTeachIn
+                      formData.preferredTeachingBranches
                         .filter(
                           (value) =>
                             !optionBranchWantteach.some(
@@ -82,17 +72,18 @@ const StepTeachingPreferences = ({
                     )
                 : []
             }
-            name="branchesYouCanTeachIn"
-            required
-            isMulti
-            errorMessage={formErrors.branchesYouCanTeachIn}
+            name="preferredTeachingBranches"
+            placeholder="Select branches you can teach in"
+            required={true}
+            isMulti={true}
+            errorMessage={formErrors.preferredTeachingBranches}
           />
         </div>
 
         <div>
           <SelectComponent
             options={optionsinterestedInTeaching}
-            label="interested In Teaching"
+            label="Teaching Interest"
             onChange={(selectedOption) =>
               handleSelectChange(
                 selectedOption,
@@ -112,16 +103,17 @@ const StepTeachingPreferences = ({
               ) || null
             }
             name="interestedInTeaching"
-            placeholder="interested In Teaching"
             required
+            placeholder="Select your teaching interest"
             errorMessage={formErrors.interestedInTeaching}
           />
         </div>
         <div>
           <Input
-            label="Which Teaching Courses You Prefer"
+            label="Preferred Teaching Courses"
             id="preferredCoursesToTeach"
             name="preferredCoursesToTeach"
+            placeholder="Enter preferred teaching courses"
             value={formData.preferredCoursesToTeach}
             onBlur={(e) => handleBlur(e)}
             onChange={(e) => handleInputChange(e, setFormData)}
