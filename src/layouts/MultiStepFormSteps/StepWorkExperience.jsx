@@ -27,6 +27,7 @@ const StepWorkExperience = ({
             label="Job Title"
             id="fullJobTitle"
             name="fullJobTitle"
+            placeholder="Enter your job title"
             value={formData.fullJobTitle}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
@@ -40,6 +41,7 @@ const StepWorkExperience = ({
             label="Company Name"
             id="companyName"
             name="companyName"
+            placeholder="Enter your company name"
             value={formData.companyName}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
@@ -50,14 +52,15 @@ const StepWorkExperience = ({
         </div>
         <div>
           <Input
-            label="years Of Experience"
+            label="Years of Experience"
             id="yearsOfExperience"
             name="yearsOfExperience"
+            placeholder="Enter your number years of experience"
             value={formData.yearsOfExperience}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
-            type="Number"
+            type="number"
             errorMessage={formErrors.yearsOfExperience}
             disabled={formData.isEmployed === true ? false : true}
           />
@@ -96,7 +99,7 @@ const StepWorkExperience = ({
         </div>
         <div className="md:flex gap-6 w-[290px]  items-end">
           <Input
-            label="Is Freelancer"
+            label="Freelancer"
             id="hasFreelanceExperience"
             name="hasFreelanceExperience"
             type="checkbox"
