@@ -32,7 +32,9 @@ const StepWorkExperience = ({
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
-            errorMessage={formErrors.fullJobTitle}
+            errorMessage={
+              formData.isEmployed === true ? formErrors.fullJobTitle : null
+            }
             disabled={formData.isEmployed === true ? false : true}
           />
         </div>
@@ -46,7 +48,9 @@ const StepWorkExperience = ({
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
-            errorMessage={formErrors.companyName}
+            errorMessage={
+              formData.isEmployed === true ? formErrors.companyName : null
+            }
             disabled={formData.isEmployed === true ? false : true}
           />
         </div>
@@ -61,41 +65,42 @@ const StepWorkExperience = ({
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
             type="number"
-            errorMessage={formErrors.yearsOfExperience}
+            errorMessage={
+              formData.isEmployed === true ? formErrors.yearsOfExperience : null
+            }
             disabled={formData.isEmployed === true ? false : true}
           />
         </div>
 
         <div>
-          {
-            <SelectComponent
-              options={optionsFreelancingIncome}
-              label="You Freelancing Income"
-              onChange={(selectedOption) =>
-                handleSelectChange(
-                  selectedOption,
-                  "freelancingIncome",
-                  setFormData
-                )
-              }
-              value={
-                optionsFreelancingIncome?.find(
-                  (option) => option.value === formData.freelancingIncome
-                ) || null
-              }
-              onBlur={() =>
-                handleSelectBlur(
-                  "freelancingIncome",
-                  formData.freelancingIncome
-                )
-              }
-              name="freelancingIncome"
-              placeholder="FreeLancing Income"
-              required={formData.isFreelancer === true}
-              errorMessage={formErrors.freelancingIncome}
-              disabled={formData.hasFreelanceExperience === true ? false : true}
-            />
-          }
+          <SelectComponent
+            options={optionsFreelancingIncome}
+            label="You Freelancing Income"
+            onChange={(selectedOption) =>
+              handleSelectChange(
+                selectedOption,
+                "freelancingIncome",
+                setFormData
+              )
+            }
+            value={
+              optionsFreelancingIncome?.find(
+                (option) => option.value === formData.freelancingIncome
+              ) || null
+            }
+            onBlur={() =>
+              handleSelectBlur("freelancingIncome", formData.freelancingIncome)
+            }
+            name="freelancingIncome"
+            placeholder="FreeLancing Income"
+            required={formData.isFreelancer === true}
+            errorMessage={
+              formData.hasFreelanceExperience === true
+                ? formErrors.freelancingIncome
+                : null
+            }
+            disabled={formData.hasFreelanceExperience === true ? false : true}
+          />
         </div>
         <div className="md:flex gap-6 w-[290px]  items-end">
           <Input
