@@ -12,7 +12,7 @@ const StepWorkExperience = ({
   handleBlur,
   handleSelectBlur,
 }) => {
-  const optionsFreelancingIncome = Data.FreelancingIncome?.map((gain) => ({
+  const optionsFreelancingIncome = Data.freelancingIncome?.map((gain) => ({
     value: gain.value,
     label: gain.label,
   }));

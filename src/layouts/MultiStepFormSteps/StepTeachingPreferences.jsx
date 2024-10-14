@@ -108,17 +108,20 @@ const StepTeachingPreferences = ({
             errorMessage={formErrors.interestedInTeaching}
           />
         </div>
-        <div>
+        <div className="input-with-tooltip">
           <Input
             label="Preferred Teaching Courses"
             id="preferredCoursesToTeach"
             name="preferredCoursesToTeach"
-            placeholder="Enter preferred teaching courses"
+            placeholder="Enter preferred teaching courses (e.g., JavaScript, TypeScript, NodeJs)"
             value={formData.preferredCoursesToTeach}
             onBlur={(e) => handleBlur(e)}
             onChange={(e) => handleInputChange(e, setFormData)}
             errorMessage={formErrors.preferredCoursesToTeach}
           />
+          <span className="tooltip">
+            Write the courses separated by commas, e.g., JavaScript, TypeScript
+          </span>
         </div>
       </div>
     </div>
