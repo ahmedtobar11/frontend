@@ -18,7 +18,7 @@ const MultiStepForm = () => {
     university: "",
     trackName: "",
     branch: "",
-    itiGraduationYear: "",
+    itiGraduationYear: 0,
     preferredTeachingBranches: [],
     preferredCoursesToTeach: "",
     fullJobTitle: "",
@@ -30,7 +30,7 @@ const MultiStepForm = () => {
     interestedInTeaching: "",
     linkedin: "",
     isEmployed: false,
-    freelancingIncome: 0,
+    freelancingIncome: "",
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -41,12 +41,16 @@ const MultiStepForm = () => {
       await stepValidationSchemas[currentStep].validate(formData, {
         abortEarly: false,
       });
+
       return {};
     } catch (err) {
       const errors = {};
-      err.inner.forEach((error) => {
-        errors[error.path] = error.message;
-      });
+      if (err.inner) {
+        err.inner.forEach((error) => {
+          errors[error.path] = error.message;
+        });
+      }
+
       return errors;
     }
   };
@@ -73,11 +77,13 @@ const MultiStepForm = () => {
   };
 
   const handleBlur = async (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+    const newValue =
+      type === "number" && (value === "" || isNaN(value)) ? 0 : value;
 
     const errors = await validateStep(currentStep, {
       ...formData,
-      [name]: value,
+      [name]: newValue,
     });
 
     setFormErrors((prev) => ({
@@ -100,15 +106,7 @@ const MultiStepForm = () => {
 
   const handleSubmit = async (currentStep, formData, setFormErrors) => {
     setIsSubmitting(true);
-    const loadingSwal = Swal.fire({
-      title: "Submitting...",
-      text: "Please wait while we process your registration.",
-      didOpen: () => {
-        Swal.showLoading();
-      },
-      showConfirmButton: false,
-      allowOutsideClick: false,
-    });
+    let loadingSwal;
 
     try {
       const errors = await validateStep(currentStep, formData);
@@ -116,6 +114,16 @@ const MultiStepForm = () => {
         setFormErrors(errors);
         return;
       }
+
+      loadingSwal = Swal.fire({
+        title: "Submitting...",
+        text: "Please wait while we process your registration.",
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        showConfirmButton: false,
+        allowOutsideClick: false,
+      });
 
       if (currentStep === steps.length - 1) {
         const response = await registrationApiRequest.createRegistrationRequest(
@@ -134,7 +142,10 @@ const MultiStepForm = () => {
         console.log(response);
       }
     } catch (error) {
-      loadingSwal.close();
+      if (loadingSwal) {
+        loadingSwal.close();
+      }
+
       Swal.fire({
         title: "Error!",
         text: `There was an issue: ${error.message}. Please try again.`,
