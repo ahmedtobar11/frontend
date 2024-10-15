@@ -3,7 +3,7 @@ import * as Yup from "yup";
 const stepValidationSchemas = [
   Yup.object().shape({
     fullName: Yup.string().required("Full Name is required."),
-    personalPhoto: Yup.string().required("Personal Photo is required."),
+    personalPhoto: Yup.string().nullable().optional(),
     email: Yup.string()
       .matches(
         /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/,

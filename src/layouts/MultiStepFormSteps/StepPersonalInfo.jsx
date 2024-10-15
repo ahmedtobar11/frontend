@@ -109,7 +109,6 @@ const StepPersonalInfo = ({
             accept="image/*"
             onChange={(e) => handleFileChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
-            required
             errorMessage={formErrors.personalPhoto}
           />
         </div>
