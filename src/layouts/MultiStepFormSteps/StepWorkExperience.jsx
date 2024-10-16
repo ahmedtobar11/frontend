@@ -28,7 +28,7 @@ const StepWorkExperience = ({
             id="fullJobTitle"
             name="fullJobTitle"
             placeholder="Enter your job title"
-            value={formData.fullJobTitle}
+            value={formData.isEmployed ? formData.fullJobTitle : ""}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
@@ -44,7 +44,7 @@ const StepWorkExperience = ({
             id="companyName"
             name="companyName"
             placeholder="Enter your company name"
-            value={formData.companyName}
+            value={formData.isEmployed ? formData.companyName : ""}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
@@ -60,7 +60,7 @@ const StepWorkExperience = ({
             id="yearsOfExperience"
             name="yearsOfExperience"
             placeholder="Enter your number years of experience"
-            value={formData.yearsOfExperience}
+            value={formData.isEmployed ? formData.yearsOfExperience : 0}
             onChange={(e) => handleInputChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
             required={formData.isEmployed === true}
@@ -84,9 +84,11 @@ const StepWorkExperience = ({
               )
             }
             value={
-              optionsFreelancingIncome?.find(
-                (option) => option.value === formData.freelancingIncome
-              ) || null
+              formData.hasFreelanceExperience
+                ? optionsFreelancingIncome?.find(
+                    (option) => option.value === formData.freelancingIncome
+                  ) || null
+                : (formData.freelancingIncome = "")
             }
             onBlur={() =>
               handleSelectBlur("freelancingIncome", formData.freelancingIncome)
