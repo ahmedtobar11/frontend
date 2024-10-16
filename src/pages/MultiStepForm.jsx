@@ -4,6 +4,8 @@ import { renderStep, steps } from "../services/registerFormUtils";
 import Button from "../components/Ui/Button";
 import registrationApiRequest from "../services/apiRequests/registrationApiRequest";
 import stepValidationSchemas from "../../utils/validations/graduationSchema";
+import { Phone, Mail } from "lucide-react";
+
 import Swal from "sweetalert2";
 
 const MultiStepForm = () => {
@@ -156,56 +158,96 @@ const MultiStepForm = () => {
       setIsSubmitting(false);
     }
   };
-
   return (
-    <div className="flex min-h-screen bg-gray-100 ">
-      <aside className="w-80 mr-6 space-y-12 bg-main-light px-2 flex flex-col justify-between">
-        <StepIndicator currentStep={currentStep} formData={formData} />
-
-        <img className="self-center" src="logo.png" alt="logo" />
-      </aside>
-      <div className="flex-1 px-6 py-10 space-y-4">
-        <div className="min-h-px  max-h-full">
-          {renderStep(
-            currentStep,
-            formData,
-            setFormData,
-            formErrors,
-            handleBlur,
-            handleSelectBlur
-          )}
-        </div>
-        <div className="flex md:justify-between px-10 items-start gap-6 ">
-          <Button
-            onClick={() => handlePrevious(setCurrentStep)}
-            text={"Previous"}
-            variant={"outline"}
-            className={`${
-              currentStep > 0 ? "text-center w-32" : "invisible"
-            } place-self-end`}
-            disabled={isSubmitting}
-          />
-
-          {currentStep < steps.length - 1 ? (
-            <Button
-              onClick={() =>
-                handleNext(setCurrentStep, currentStep, formData, setFormErrors)
-              }
-              text={"NEXT"}
-              className="place-self-end w-32 "
-              disabled={isSubmitting}
-            />
-          ) : (
-            <Button
-              onClick={() => handleSubmit(currentStep, formData, setFormErrors)}
-              text={"Submit"}
-              className="place-self-end w-32 "
-              disabled={isSubmitting}
-            />
-          )}
+    <>
+      <div className="md:flex  bg-light-dark h-6 px-2 text-text hidden lg:flex justify-end  ">
+        <div className="text-main font-bold w-64 pr-5  mr-10 flex justify-between ">
+          <a
+            href="tel:17002"
+            className="flex justify-around w-20 align-baseline"
+          >
+            <Phone size={20} className="pt-1" /> 17002
+          </a>
+          <a href="mailto:ITIinfo@iti.gov.eg"> ITIinfo@iti.gov.eg</a>
         </div>
       </div>
-    </div>
+      <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
+        <nav className="w-full md:hidden bg-main-light p-2 sm:p-3">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <img
+              className="h-16 sm:h-14 mb-2 sm:mb-0"
+              src="itiColoredLogo.svg"
+              alt="ITI logo"
+            />
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 text-main font-semibold text-xs sm:text-sm">
+              <a href="tel:17002" className="flex items-center">
+                <Phone size={14} className="mr-1 text-main" /> 17002
+              </a>
+              <a href="mailto:ITIinfo@iti.gov.eg" className="flex items-center">
+                <Mail size={14} className="mr-1 text-main" /> ITIinfo@iti.gov.eg
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        <aside className="shadow-md z-10 sticky top-0 w-full md:w-64 lg:w-80 mr-6  bg-main-light px-2 flex flex-col  gap-12  ">
+          <StepIndicator currentStep={currentStep} />
+          <img
+            className="hidden md:block self-center"
+            src="logo.png"
+            alt="logo"
+          />
+        </aside>
+        <div className="flex-1 px-6 py-10 space-y-4">
+          <div className="min-h-px  max-h-full">
+            {renderStep(
+              currentStep,
+              formData,
+              setFormData,
+              formErrors,
+              handleBlur,
+              handleSelectBlur
+            )}
+          </div>
+          <div className="flex md:justify-between px-10 items-start gap-8">
+            <Button
+              onClick={() => handlePrevious(setCurrentStep)}
+              text={"Previous"}
+              variant={"outline"}
+              className={`${
+                currentStep > 0 ? "text-center w-32" : "invisible"
+              } place-self-end`}
+              disabled={isSubmitting}
+            />
+
+            {currentStep < steps.length - 1 ? (
+              <Button
+                onClick={() =>
+                  handleNext(
+                    setCurrentStep,
+                    currentStep,
+                    formData,
+                    setFormErrors
+                  )
+                }
+                text={"NEXT"}
+                className="place-self-end w-32 "
+                disabled={isSubmitting}
+              />
+            ) : (
+              <Button
+                onClick={() =>
+                  handleSubmit(currentStep, formData, setFormErrors)
+                }
+                text={"Submit"}
+                className="place-self-end w-32 "
+                disabled={isSubmitting}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
