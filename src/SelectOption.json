@@ -33,7 +33,7 @@
       "label": "Sharqia"
     },
     {
-      "value": "kafr_el_sheikh",
+      "value": "kafr El Sheikh",
       "label": "Kafr El Sheikh"
     },
     {
@@ -49,7 +49,7 @@
       "label": "Suez"
     },
     {
-      "value": "port_said",
+      "value": "port Said",
       "label": "Port Said"
     },
     {
@@ -57,15 +57,15 @@
       "label": "Ismailia"
     },
     {
-      "value": "south_sinai",
+      "value": "south Sinai",
       "label": "South Sinai"
     },
     {
-      "value": "north_sinai",
+      "value": "north Sinai",
       "label": "North Sinai"
     },
     {
-      "value": "red_sea",
+      "value": "red Sea",
       "label": "Red Sea"
     },
     {
@@ -93,155 +93,163 @@
       "label": "Fayoum"
     },
     {
-      "value": "bani_suef",
+      "value": "bani Suef",
       "label": "Beni Suef"
     },
     {
       "value": "sohag",
       "label": "Sohag"
+    },
+    {
+      "value": "damietta",
+      "label": "Damietta"
+    },
+    {
+      "value": "dakahlia",
+      "label": "Dakahlia"
     }
   ],
   "Universities": [
     {
-      "value": "cairo_university",
+      "value": "Cairo University",
       "label": "Cairo University"
     },
     {
-      "value": "alexandria_university",
+      "value": "Alexandria University",
       "label": "Alexandria University"
     },
     {
-      "value": "ain_shams_university",
+      "value": "Ain Shams University",
       "label": "Ain Shams University"
     },
     {
-      "value": "mansoura_university",
+      "value": "Mansoura University",
       "label": "Mansoura University"
     },
     {
-      "value": "zagazig_university",
+      "value": "Zagazig University",
       "label": "Zagazig University"
     },
     {
-      "value": "assiut_university",
+      "value": "Assiut University",
       "label": "Assiut University"
     },
     {
-      "value": "south_valley_university",
+      "value": "South Valley University",
       "label": "South Valley University"
     },
     {
-      "value": "port_said_university",
+      "value": "Port Said University",
       "label": "Port Said University"
     },
     {
-      "value": "suez_canals_university",
+      "value": "Suez Canal University",
       "label": "Suez Canal University"
     },
     {
-      "value": "minia_university",
+      "value": "Minia University",
       "label": "Minia University"
     },
     {
-      "value": "fayoum_university",
+      "value": "Fayoum University",
       "label": "Fayoum University"
     },
     {
-      "value": "bani_suef_university",
+      "value": "Beni Suef University",
       "label": "Beni Suef University"
     },
     {
-      "value": "helwan_university",
+      "value": "Helwan University",
       "label": "Helwan University"
     },
     {
-      "value": "al_azhar_university",
+      "value": "aAl-Azhar University",
       "label": "Al-Azhar University"
     },
     {
-      "value": "nasser_university",
+      "value": "Nasser University",
       "label": "Nasser University"
     },
     {
-      "value": "october_6_university",
+      "value": "October 6 University",
       "label": "October 6 University"
     },
     {
-      "value": "future_university",
+      "value": "Future University",
       "label": "Future University"
     },
     {
-      "value": "modern_university",
+      "value": "Modern University",
       "label": "Modern University for Technology and Information"
     },
     {
-      "value": "university_of_six_october",
+      "value": "University of Six October",
       "label": "University of Six October"
     },
     {
-      "value": "university_of_suez",
+      "value": "University of Suez",
       "label": "University of Suez"
     }
   ],
   "faculties": [
     {
-      "value": "engineering_faculty",
+      "value": "Faculty of Engineering",
       "label": "Faculty of Engineering"
     },
     {
-      "value": "medicine_faculty",
+      "value": "Faculty of Medicine",
       "label": "Faculty of Medicine"
     },
     {
-      "value": "pharmacy_faculty",
+      "value": "Faculty of Pharmacy",
       "label": "Faculty of Pharmacy"
     },
     {
-      "value": "dentistry_faculty",
+      "value": "Faculty of Dentistry",
       "label": "Faculty of Dentistry"
     },
     {
-      "value": "science_faculty",
+      "value": "Faculty of Science",
       "label": "Faculty of Science"
     },
     {
-      "value": "commerce_faculty",
+      "value": "Faculty of Commerce",
       "label": "Faculty of Commerce"
     },
     {
-      "value": "arts_faculty",
+      "value": "Faculty of Arts",
       "label": "Faculty of Arts"
     },
     {
-      "value": "law_faculty",
+      "value": "Faculty of Law",
       "label": "Faculty of Law"
     },
     {
-      "value": "agriculture_faculty",
+      "value": "Faculty of Agriculture",
       "label": "Faculty of Agriculture"
     },
     {
-      "value": "education_faculty",
+      "value": "Faculty of Education",
       "label": "Faculty of Education"
     },
     {
-      "value": "computers_faculty",
+      "value": "Faculty of Computers and Information",
       "label": "Faculty of Computers and Information"
     },
     {
-      "value": "economics_faculty",
+      "value": "Faculty of Economics",
       "label": "Faculty of Economics and Political Science"
     },
     {
-      "value": "fine_arts_faculty",
+      "value": "Faculty of Fine Arts",
       "label": "Faculty of Fine Arts"
     },
     {
-      "value": "veterinary_faculty",
+      "value": "Faculty of Veterinary Medicine",
       "label": "Faculty of Veterinary Medicine"
     },
     {
-      "value": "physical_education_faculty",
+      "value": "Faculty of Physical Education",
       "label": "Faculty of Physical Education"
     }
   ],
@@ -277,16 +285,24 @@
     {
       "value": "Courses",
       "label": "Courses"
-    }
-  ],
-  "intake": [
-    {
-      "value": "45",
-      "label": "45"
     },
     {
-      "value": "46",
-      "label": "46"
+      "value": "Both",
+      "label": "Both"
+    }
+  ],
+  "round": [
+    {
+      "value": "round 1",
+      "label": "round 1"
+    },
+    {
+      "value": "round 2",
+      "label": "round 2"
+    },
+    {
+      "value": "round 3",
+      "label": "round 3"
     }
   ]
 }
