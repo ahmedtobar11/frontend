@@ -68,9 +68,10 @@ const StepEducationDetails = ({
               }
               onBlur={() => handleSelectBlur("university", formData.university)}
               value={
-                optionsUniversity.find(
-                  (option) => option.value === formData.university
-                ) || null
+                optionsUniversity.find((option) => option.value === formData.university) ||
+                (formData.university
+                  ? { value: formData.university, label: formData.university }
+                  : null)
               }
               name="university"
               placeholder="Select your university"
@@ -87,9 +88,10 @@ const StepEducationDetails = ({
               }
               onBlur={() => handleSelectBlur("faculty", formData.faculty)}
               value={
-                optionsFactualy.find(
-                  (option) => option.value === formData.faculty
-                ) || null
+                optionsFactualy.find((option) => option.value === formData.faculty) ||
+                (formData.faculty
+                  ? { value: formData.faculty, label: formData.faculty }
+                  : null)
               }
               name="faculty"
               placeholder="Select your faculty"
