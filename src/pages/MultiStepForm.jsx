@@ -133,8 +133,6 @@ const MultiStepForm = () => {
         }).then(() => {
           window.location.reload();
         });
-
-        console.log(response);
       }
     } catch (error) {
       Swal.fire({
@@ -142,8 +140,6 @@ const MultiStepForm = () => {
         text: `${error.message}`,
         icon: "error",
       });
-
-      console.log(error.message || "Error Submitting register form");
     } finally {
       if (loadingSwal) {
         loadingSwal.close();
