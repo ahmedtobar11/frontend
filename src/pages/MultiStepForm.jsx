@@ -128,7 +128,7 @@ const MultiStepForm = () => {
 
         Swal.fire({
           title: "Thanks For Submit!",
-          text: "Your Registration Done Successfully. Please wait for our answer!",
+          text: "Your Data has been Registered Successfully.",
           icon: "success",
         }).then(() => {
           window.location.reload();
