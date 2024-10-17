@@ -154,7 +154,7 @@ const MultiStepForm = () => {
   return (
     <>
       <div className="md:flex  bg-light-dark h-6 px-2 text-text hidden lg:flex justify-end  ">
-        <div className="text-main font-bold w-64 pr-5  mr-10 flex justify-between ">
+        <div className="text-main font-bold w-64   mr-8 flex justify-between ">
           <a
             href="tel:17002"
             className="flex justify-around w-20 align-baseline"
