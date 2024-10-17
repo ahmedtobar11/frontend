@@ -213,24 +213,25 @@ const MultiStepForm = () => {
               disabled={isSubmitting}
             />
 
-          {currentStep < steps.length - 1 ? (
-            <Button
-              onClick={handleNext}
-              text={"NEXT"}
-              className="place-self-end w-32 "
-              disabled={isSubmitting}
-            />
-          ) : (
-            <Button
-              onClick={handleSubmit}
-              text={"Submit"}
-              className="place-self-end w-32 "
-              disabled={isSubmitting}
-            />
-          )}
+            {currentStep < steps.length - 1 ? (
+              <Button
+                onClick={handleNext}
+                text={"NEXT"}
+                className="place-self-end w-32 "
+                disabled={isSubmitting}
+              />
+            ) : (
+              <Button
+                onClick={handleSubmit}
+                text={"Submit"}
+                className="place-self-end w-32 "
+                disabled={isSubmitting}
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -80,7 +80,7 @@ const stepValidationSchemas = [
           "Professional Training Program - (9 Months)",
           "Intensive Code Camp - (4 Months)",
         ],
-        "Program must be either Professional Training Program - (9 Months) or Intensive Code Camp - (4 Months)."
+        "Please select one of the two provided programs"
       )
       .required("Program is required."),
 
@@ -128,7 +128,7 @@ const stepValidationSchemas = [
       .of(Yup.string())
       .min(
         1,
-        "You have to include at least one branch you're interested to teach in!"
+        "Please choose at least one branch you're interested in teaching in"
       )
       .required("Preferred teaching branches are required."),
 
@@ -146,9 +146,9 @@ const stepValidationSchemas = [
     interestedInTeaching: Yup.string()
       .oneOf(
         ["Business sessions", "Courses", "Both"],
-        "Please specify a valid teaching interest (Business sessions or Courses)."
+        "Please select a valid teaching preference (Business sessions, Courses or both)."
       )
-      .required("Teaching interest is required."),
+      .required("Please select your teaching preferences"),
   }),
 
   Yup.object().shape({

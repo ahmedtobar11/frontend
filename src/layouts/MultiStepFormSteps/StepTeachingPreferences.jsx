@@ -144,11 +144,11 @@ const StepTeachingPreferences = ({
                 : []
             }
             name="preferredCoursesToTeach"
-            placeholder="Create your preferred teaching courses (e.g., JavaScript, TypeScript, NodeJs)"
+            placeholder="Add your preferred teaching courses (e.g., JavaScript, TypeScript, NodeJs)"
             required={true}
             isMulti={true}
             isCreatable={true}
-            errorMessage={formErrors.preferredCoursesToTeach}
+            errorMessage={formErrors?.preferredCoursesToTeach}
           />
 
           <span className="tooltip">

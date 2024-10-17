@@ -104,7 +104,7 @@ const StepEducationDetails = ({
           <div className="xl:flex xl:space-x-4">
             <SelectComponent
               options={optionbranch}
-              label="Iti branch you Graduted from"
+              label="ITI branch you Graduted from"
               onChange={(selectedOption) =>
                 handleSelectChange(selectedOption, "branch", setFormData)
               }
