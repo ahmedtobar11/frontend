@@ -139,7 +139,7 @@ const MultiStepForm = () => {
     } catch (error) {
       Swal.fire({
         title: "Error!",
-        text: `There was an issue: ${error.message}. Please try again.`,
+        text: `${error.message}`,
         icon: "error",
       });
 
