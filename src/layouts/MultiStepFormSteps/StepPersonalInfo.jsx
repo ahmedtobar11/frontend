@@ -18,71 +18,70 @@ const StepPersonalInfo = ({
     label: city.label,
   }));
 
+  const renderInput = (
+    label,
+    id,
+    name,
+    type = "text",
+    placeholder,
+    required = false
+  ) => (
+    <Input
+      label={label}
+      id={id}
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      value={formData[name]}
+      onChange={(e) => handleInputChange(e, setFormData)}
+      onBlur={(e) => handleBlur(e)}
+      required={required}
+      errorMessage={formErrors[name]}
+    />
+  );
+
   return (
-    <div className="space-y-10 ">
+    <div className="space-y-10">
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Personal Information
       </h1>
       <div className="w-max-xl px-10">
-        <div>
-          <Input
-            label="Full Name"
-            id="fullName"
-            name="fullName"
-            placeholder="Enter your full name"
-            value={formData.fullName}
-            onChange={(e) => handleInputChange(e, setFormData)}
-            onBlur={(e) => handleBlur(e)}
-            required
-            errorMessage={formErrors.fullName}
-          />
-        </div>
-
-        <div>
-          <Input
-            label="Mobile"
-            id="mobile"
-            name="mobile"
-            placeholder="Enter your mobile number"
-            value={formData.mobile}
-            onChange={(e) => handleInputChange(e, setFormData)}
-            onBlur={(e) => handleBlur(e)}
-            required
-            errorMessage={formErrors.mobile}
-          />
-        </div>
-        <div>
-          <Input
-            label="Email"
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Enter your email address"
-            value={formData.email}
-            onChange={(e) => handleInputChange(e, setFormData)}
-            onBlur={(e) => handleBlur(e)}
-            required
-            errorMessage={formErrors.email}
-          />
-        </div>
-
-        <div>
-          <Input
-            label="LinkedIn"
-            id="linkedin"
-            name="linkedin"
-            type="linkedin"
-            placeholder="Enter your LinkedIn profile URL"
-            value={formData.linkedin}
-            onChange={(e) => handleInputChange(e, setFormData)}
-            onBlur={(e) => handleBlur(e)}
-            errorMessage={formErrors.linkedin}
-          />
-        </div>
+        {renderInput(
+          "Full Name",
+          "fullName",
+          "fullName",
+          "text",
+          "Enter your full name",
+          true
+        )}
+        {renderInput(
+          "Mobile",
+          "mobile",
+          "mobile",
+          "text",
+          "Enter your mobile number",
+          true
+        )}
+        {renderInput(
+          "Email",
+          "email",
+          "email",
+          "email",
+          "Enter your email address",
+          true
+        )}
+        {renderInput(
+          "LinkedIn",
+          "linkedin",
+          "linkedin",
+          "text",
+          "Enter your LinkedIn profile URL"
+        )}
 
         <div>
           <SelectComponent
             options={options}
+            placeholder="Select or Create your city of birth"
             label="City Of Birth"
             onChange={(selectedOption) =>
               handleSelectChange(selectedOption, "cityOfBirth", setFormData)
@@ -90,10 +89,11 @@ const StepPersonalInfo = ({
             onBlur={() => handleSelectBlur("cityOfBirth", formData.cityOfBirth)}
             value={
               options.find((option) => option.value === formData.cityOfBirth) ||
-              null
+              (formData.cityOfBirth
+                ? { value: formData.cityOfBirth, label: formData.cityOfBirth }
+                : null)
             }
             name="cityOfBirth"
-            placeholder="Select your city of birth"
             isCreatable
             required
             errorMessage={formErrors.cityOfBirth}
@@ -109,6 +109,7 @@ const StepPersonalInfo = ({
             accept="image/*"
             onChange={(e) => handleFileChange(e, setFormData)}
             onBlur={(e) => handleBlur(e)}
+            required
             errorMessage={formErrors.personalPhoto}
           />
         </div>
@@ -116,5 +117,4 @@ const StepPersonalInfo = ({
     </div>
   );
 };
-
 export default StepPersonalInfo;

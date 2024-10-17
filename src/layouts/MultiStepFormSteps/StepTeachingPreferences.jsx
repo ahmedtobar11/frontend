@@ -12,7 +12,7 @@ const StepTeachingPreferences = ({
   formData,
   setFormData,
   formErrors,
-  handleBlur,
+
   handleSelectBlur,
 }) => {
   const { branches } = useBranchesAndTracks();
@@ -23,7 +23,7 @@ const StepTeachingPreferences = ({
       label: interestedInTeaching.label,
     })
   );
-
+  const optionPreferenceCourse = [];
   const optionBranchWantteach = Array.from(
     new Set(branches?.map((branch) => branch?.name))
   ).map((name) => ({
@@ -109,16 +109,48 @@ const StepTeachingPreferences = ({
           />
         </div>
         <div className="input-with-tooltip">
-          <Input
+          <SelectComponent
+            options={optionPreferenceCourse}
             label="Preferred Teaching Courses"
-            id="preferredCoursesToTeach"
+            onChange={(selectedOption) =>
+              handleMultiSelectChange(
+                selectedOption,
+                "preferredCoursesToTeach",
+                setFormData
+              )
+            }
+            onBlur={() =>
+              handleSelectBlur(
+                "preferredCoursesToTeach",
+                formData.preferredCoursesToTeach
+              )
+            }
+            value={
+              formData?.preferredCoursesToTeach
+                ? optionPreferenceCourse
+                    .filter((option) =>
+                      formData.preferredCoursesToTeach.includes(option.value)
+                    )
+                    .concat(
+                      formData.preferredCoursesToTeach
+                        .filter(
+                          (value) =>
+                            !optionPreferenceCourse.some(
+                              (option) => option.value === value
+                            )
+                        )
+                        .map((value) => ({ value, label: value }))
+                    )
+                : []
+            }
             name="preferredCoursesToTeach"
-            placeholder="Enter preferred teaching courses (e.g., JavaScript, TypeScript, NodeJs)"
-            value={formData.preferredCoursesToTeach}
-            onBlur={(e) => handleBlur(e)}
-            onChange={(e) => handleInputChange(e, setFormData)}
-            errorMessage={formErrors.preferredCoursesToTeach}
+            placeholder="Add your preferred teaching courses (e.g., JavaScript, TypeScript, NodeJs)"
+            required={true}
+            isMulti={true}
+            isCreatable={true}
+            errorMessage={formErrors?.preferredCoursesToTeach}
           />
+
           <span className="tooltip">
             Write the courses separated by commas, e.g., JavaScript, TypeScript
           </span>

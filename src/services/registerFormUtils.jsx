@@ -10,12 +10,30 @@ export const steps = [
   "Work Experience",
 ];
 
+const stepComponents = [
+  StepPersonalInfo,
+  StepEducationDetails,
+  StepTeachingPreferences,
+  StepWorkExperience,
+];
+
 export const handleInputChange = (e, setFormData) => {
   const { name, value, type, checked } = e.target;
-  setFormData((prev) => ({
-    ...prev,
-    [name]: type === "checkbox" ? checked : value,
-  }));
+
+  setFormData((prev) => {
+    const updatedFormData = {
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    };
+
+    if (name === "isEmployed" && !checked) {
+      updatedFormData.fullJobTitle = "";
+      updatedFormData.companyName = "";
+      updatedFormData.yearsOfExperience = 0;
+    }
+
+    return updatedFormData;
+  });
 };
 
 export const handleSelectChange = (selectedOption, fieldName, setFormData) => {
@@ -56,49 +74,14 @@ export const renderStep = (
   handleBlur,
   handleSelectBlur
 ) => {
-  switch (currentStep) {
-    case 0:
-      return (
-        <StepPersonalInfo
-          formData={formData}
-          setFormData={setFormData}
-          formErrors={formErrors}
-          handleBlur={handleBlur}
-          handleSelectBlur={handleSelectBlur}
-        />
-      );
-    case 1:
-      return (
-        <StepEducationDetails
-          formData={formData}
-          setFormData={setFormData}
-          formErrors={formErrors}
-          handleBlur={handleBlur}
-          handleSelectBlur={handleSelectBlur}
-        />
-      );
-    case 2:
-      return (
-        <StepTeachingPreferences
-          formData={formData}
-          setFormData={setFormData}
-          formErrors={formErrors}
-          handleBlur={handleBlur}
-          handleSelectBlur={handleSelectBlur}
-        />
-      );
-    case 3:
-      return (
-        <StepWorkExperience
-          formData={formData}
-          setFormData={setFormData}
-          formErrors={formErrors}
-          handleBlur={handleBlur}
-          handleSelectBlur={handleSelectBlur}
-        />
-      );
-
-    default:
-      return null;
-  }
+  const StepComponent = stepComponents[currentStep];
+  return StepComponent ? (
+    <StepComponent
+      formData={formData}
+      setFormData={setFormData}
+      formErrors={formErrors}
+      handleBlur={handleBlur}
+      handleSelectBlur={handleSelectBlur}
+    />
+  ) : null;
 };

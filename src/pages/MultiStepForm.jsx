@@ -47,22 +47,16 @@ const MultiStepForm = () => {
       return {};
     } catch (err) {
       const errors = {};
-      if (err.inner) {
-        err.inner.forEach((error) => {
-          errors[error.path] = error.message;
-        });
-      }
+
+      err.inner.forEach((error) => {
+        errors[error.path] = error.message;
+      });
 
       return errors;
     }
   };
 
-  const handleNext = async (
-    setCurrentStep,
-    currentStep,
-    formData,
-    setFormErrors
-  ) => {
+  const handleNext = async () => {
     const errors = await validateStep(currentStep, formData);
 
     if (Object.keys(errors).length > 0) {
@@ -74,7 +68,7 @@ const MultiStepForm = () => {
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
-  const handlePrevious = (setCurrentStep) => {
+  const handlePrevious = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
 
@@ -106,7 +100,7 @@ const MultiStepForm = () => {
     }));
   };
 
-  const handleSubmit = async (currentStep, formData, setFormErrors) => {
+  const handleSubmit = async () => {
     setIsSubmitting(true);
     let loadingSwal;
 
@@ -132,7 +126,6 @@ const MultiStepForm = () => {
           formData
         );
 
-        loadingSwal.close();
         Swal.fire({
           title: "Thanks For Submit!",
           text: "Your Registration Done Successfully. Please wait for our answer!",
@@ -144,17 +137,17 @@ const MultiStepForm = () => {
         console.log(response);
       }
     } catch (error) {
-      if (loadingSwal) {
-        loadingSwal.close();
-      }
-
       Swal.fire({
         title: "Error!",
         text: `There was an issue: ${error.message}. Please try again.`,
         icon: "error",
       });
+
       console.log(error.message || "Error Submitting register form");
     } finally {
+      if (loadingSwal) {
+        loadingSwal.close();
+      }
       setIsSubmitting(false);
     }
   };
@@ -222,23 +215,14 @@ const MultiStepForm = () => {
 
             {currentStep < steps.length - 1 ? (
               <Button
-                onClick={() =>
-                  handleNext(
-                    setCurrentStep,
-                    currentStep,
-                    formData,
-                    setFormErrors
-                  )
-                }
+                onClick={handleNext}
                 text={"NEXT"}
                 className="place-self-end w-32 "
                 disabled={isSubmitting}
               />
             ) : (
               <Button
-                onClick={() =>
-                  handleSubmit(currentStep, formData, setFormErrors)
-                }
+                onClick={handleSubmit}
                 text={"Submit"}
                 className="place-self-end w-32 "
                 disabled={isSubmitting}

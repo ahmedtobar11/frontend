@@ -19,6 +19,7 @@ const Input = forwardRef(
       maxLength,
       pattern,
       readOnly = false,
+      checked=false,
       onBlur,
       "aria-describedby": ariaDescribedBy,
     },
@@ -67,6 +68,7 @@ const Input = forwardRef(
             pattern={pattern}
             readOnly={readOnly}
             onBlur={onBlur}
+            checked={checked}
             aria-invalid={!!errorMessage}
             aria-describedby={`${errorMessage ? errorId : ""} ${
               helpText ? helpTextId : ""
