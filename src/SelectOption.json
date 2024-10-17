@@ -1,6 +1,14 @@
 {
   "CityOfEgypt": [
     {
+      "value": "Damietta",
+      "label": "Damietta"
+    },
+    {
+      "value": "The New Valley",
+      "label": "The New Valley"
+    },
+    {
       "value": "cairo",
       "label": "Cairo"
     },
