@@ -46,7 +46,8 @@ const StepPersonalInfo = ({
         Personal Information
       </h1>
       <div className="w-max-xl px-10">
-        {renderInput(
+        <div className="flex flex-col lg:flex-row lg:gap-10">
+          {renderInput(
           "Full Name",
           "fullName",
           "fullName",
@@ -62,6 +63,9 @@ const StepPersonalInfo = ({
           "Enter your mobile number",
           true
         )}
+        </div>
+        <div className="flex flex-col lg:flex-row lg:gap-10">
+
         {renderInput(
           "Email",
           "email",
@@ -77,6 +81,7 @@ const StepPersonalInfo = ({
           "text",
           "Enter your LinkedIn profile URL"
         )}
+        </div>
 
         <div>
           <SelectComponent
@@ -100,7 +105,7 @@ const StepPersonalInfo = ({
           />
         </div>
 
-        <div>
+        <div className="">
           <Input
             label="Personal Photo"
             id="personalPhoto"

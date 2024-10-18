@@ -17,11 +17,63 @@ const StepWorkExperience = ({
     label: gain.label,
   }));
   return (
-    <div className="space-y-4">
+    <div className="space-y-0">
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Work Experience
       </h1>
-      <div className="w-max-xl md:p-10">
+      <div className="flex justify-center gap-12 w-full  ">
+        <Input
+          label="Freelance Experience"
+          id="hasFreelanceExperience"
+          name="hasFreelanceExperience"
+          type="checkbox"
+          className="flex flex-row-reverse gap-2  w-32 py-3  justify-center"
+          checked={formData.hasFreelanceExperience}
+          onChange={(e) => handleInputChange(e, setFormData)}
+        />
+        {
+          <Input
+            label="Employed"
+            id="isEmployed"
+            name="isEmployed"
+            type="checkbox"
+            className="flex flex-row-reverse gap-2   w-32 py-3 justify-center"
+            checked={formData.isEmployed}
+            onChange={(e) => handleInputChange(e, setFormData)}
+          />
+        }
+      </div>
+
+      <div>
+        <SelectComponent
+          options={optionsFreelancingIncome}
+          label="You Freelancing Income"
+          onChange={(selectedOption) =>
+            handleSelectChange(selectedOption, "freelancingIncome", setFormData)
+          }
+          value={
+            formData.hasFreelanceExperience
+              ? optionsFreelancingIncome?.find(
+                  (option) => option.value === formData.freelancingIncome
+                ) || null
+              : (formData.freelancingIncome = "")
+          }
+          onBlur={() =>
+            handleSelectBlur("freelancingIncome", formData.freelancingIncome)
+          }
+          name="freelancingIncome"
+          placeholder="FreeLancing Income"
+          required={formData.isFreelancer === true}
+          errorMessage={
+            formData.hasFreelanceExperience === true
+              ? formErrors.freelancingIncome
+              : null
+          }
+          disabled={formData.hasFreelanceExperience === true ? false : true}
+        />
+      </div>
+
+      <div className="w-max-xl md:px-5">
         <div>
           <Input
             label="Job Title"
@@ -70,61 +122,6 @@ const StepWorkExperience = ({
             }
             disabled={formData.isEmployed === true ? false : true}
           />
-        </div>
-
-        <div>
-          <SelectComponent
-            options={optionsFreelancingIncome}
-            label="You Freelancing Income"
-            onChange={(selectedOption) =>
-              handleSelectChange(
-                selectedOption,
-                "freelancingIncome",
-                setFormData
-              )
-            }
-            value={
-              formData.hasFreelanceExperience
-                ? optionsFreelancingIncome?.find(
-                    (option) => option.value === formData.freelancingIncome
-                  ) || null
-                : (formData.freelancingIncome = "")
-            }
-            onBlur={() =>
-              handleSelectBlur("freelancingIncome", formData.freelancingIncome)
-            }
-            name="freelancingIncome"
-            placeholder="FreeLancing Income"
-            required={formData.isFreelancer === true}
-            errorMessage={
-              formData.hasFreelanceExperience === true
-                ? formErrors.freelancingIncome
-                : null
-            }
-            disabled={formData.hasFreelanceExperience === true ? false : true}
-          />
-        </div>
-        <div className="md:flex gap-6 w-[290px]  items-end">
-          <Input
-            label="Freelancer"
-            id="hasFreelanceExperience"
-            name="hasFreelanceExperience"
-            type="checkbox"
-            className="flex flex-row-reverse gap-2  w-32 py-3"
-            checked={formData.hasFreelanceExperience}
-            onChange={(e) => handleInputChange(e, setFormData)}
-          />
-          {
-            <Input
-              label="Have Work"
-              id="isEmployed"
-              name="isEmployed"
-              type="checkbox"
-              className="flex flex-row-reverse gap-2 mt-5  w-32 py-3"
-              checked={formData.isEmployed}
-              onChange={(e) => handleInputChange(e, setFormData)}
-            />
-          }
         </div>
       </div>
     </div>
