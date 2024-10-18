@@ -53,11 +53,11 @@ const StepEducationDetails = ({
     !formData.program ||
     formData.program === "Intensive Code Camp - (4 Months)";
   return (
-    <div className="space-y-10">
+    <div className="space-y-6 lg:space-y-0">
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Education Details
       </h1>
-      <div className="w-max-xl md:px-10 pb-5">
+      <div className="w-max-xl md:px-10 pb-5 lg:pb-5">
         <div>
           <div className="xl:flex xl:space-x-4">
             <SelectComponent
