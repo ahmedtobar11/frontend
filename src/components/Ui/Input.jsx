@@ -89,13 +89,13 @@ const Input = forwardRef(
                   ? "h-12 mt-1"
                   : `block w-full px-3 py-2 h-12
                   border rounded-md shadow-sm 
-                  text-sm
+                  text-sm text-main
                  
                   placeholder:text-gray-400
                   disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
                   ${errorMessage
                     ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                    : "border-gray-300 focus:ring-main focus:border-main"
                   }
                   ${readOnly ? "bg-gray-50 cursor-default" : ""}
                   focus:outline-none focus:ring-2 
