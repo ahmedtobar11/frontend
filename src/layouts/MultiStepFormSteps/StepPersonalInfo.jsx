@@ -5,6 +5,7 @@ import {
   handleSelectChange,
 } from "../../services/registerFormUtils";
 import Data from "../../SelectOption.json";
+
 import SelectComponent from "../../components/Ui/SelectComponent";
 const StepPersonalInfo = ({
   formData,
@@ -45,42 +46,41 @@ const StepPersonalInfo = ({
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Personal Information
       </h1>
-      <div className="w-max-xl px-10">
+      <div className="w-max-xl md:px-10 pb-5 lg:pb-5">
         <div className="flex flex-col lg:flex-row lg:gap-10">
           {renderInput(
-          "Full Name",
-          "fullName",
-          "fullName",
-          "text",
-          "Enter your full name",
-          true
-        )}
-        {renderInput(
-          "Mobile",
-          "mobile",
-          "mobile",
-          "text",
-          "Enter your mobile number",
-          true
-        )}
+            "Full Name",
+            "fullName",
+            "fullName",
+            "text",
+            "Enter your full name",
+            true
+          )}
+          {renderInput(
+            "Mobile",
+            "mobile",
+            "mobile",
+            "text",
+            "Enter your mobile number",
+            true
+          )}
         </div>
         <div className="flex flex-col lg:flex-row lg:gap-10">
-
-        {renderInput(
-          "Email",
-          "email",
-          "email",
-          "email",
-          "Enter your email address",
-          true
-        )}
-        {renderInput(
-          "LinkedIn",
-          "linkedin",
-          "linkedin",
-          "text",
-          "Enter your LinkedIn profile URL"
-        )}
+          {renderInput(
+            "Email",
+            "email",
+            "email",
+            "email",
+            "Enter your email address",
+            true
+          )}
+          {renderInput(
+            "LinkedIn",
+            "linkedin",
+            "linkedin",
+            "text",
+            "Enter your LinkedIn profile URL"
+          )}
         </div>
 
         <div>
@@ -118,6 +118,7 @@ const StepPersonalInfo = ({
             errorMessage={formErrors.personalPhoto}
           />
         </div>
+        {console.log(formData)}
       </div>
     </div>
   );

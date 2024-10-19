@@ -18,33 +18,23 @@ const StepWorkExperience = ({
   }));
   return (
     <div className="space-y-0">
-      <h1 className="font-bold text-2xl text-center w-full text-main">
+      <h1 className="font-bold text-2xl text-center w-full text-main mb-10">
         Work Experience
       </h1>
-      <div className="flex justify-center gap-12 w-full  ">
-        <Input
-          label="Freelance Experience"
-          id="hasFreelanceExperience"
-          name="hasFreelanceExperience"
-          type="checkbox"
-          className="flex flex-row-reverse gap-2  w-32 py-3  justify-center"
-          checked={formData.hasFreelanceExperience}
-          onChange={(e) => handleInputChange(e, setFormData)}
-        />
-        {
-          <Input
-            label="Employed"
-            id="isEmployed"
-            name="isEmployed"
-            type="checkbox"
-            className="flex flex-row-reverse gap-2   w-32 py-3 justify-center"
-            checked={formData.isEmployed}
-            onChange={(e) => handleInputChange(e, setFormData)}
-          />
-        }
-      </div>
 
-      <div>
+      <div className="w-max-xl  md:px-10 flex flex-col items-start ">
+        <div className=" w-[270px] flex mt-3 ">
+          <Input
+            label="Have Freelance Experience?"
+            id="hasFreelanceExperience"
+            name="hasFreelanceExperience"
+            type="checkbox"
+            className="flex flex-row-reverse  gap-x-2  "
+            checked={formData.hasFreelanceExperience}
+            onChange={(e) => handleInputChange(e, setFormData)}
+            style={{ width: "25px", height: "25px" }}
+          />
+        </div>
         <SelectComponent
           options={optionsFreelancingIncome}
           label="You Freelancing Income"
@@ -72,8 +62,21 @@ const StepWorkExperience = ({
           disabled={formData.hasFreelanceExperience === true ? false : true}
         />
       </div>
-
-      <div className="w-max-xl md:px-5">
+      <div className="w-max-xl  md:px-10 flex flex-col items-start ">
+        <div className=" w-[300px] flex  ">
+          <Input
+            label="Have Employment Experience?"
+            id="isEmployed"
+            name="isEmployed"
+            type="checkbox"
+            className="flex flex-row-reverse gap-2 justify-center"
+            checked={formData.isEmployed}
+            onChange={(e) => handleInputChange(e, setFormData)}
+            style={{ width: "25px", height: "25px" }}
+          />
+        </div>
+      </div>
+      <div className="w-max-xl md:px-10">
         <div>
           <Input
             label="Job Title"

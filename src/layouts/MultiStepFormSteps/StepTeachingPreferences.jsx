@@ -145,7 +145,7 @@ const StepTeachingPreferences = ({
             }
             name="preferredCoursesToTeach"
             placeholder="Add your preferred teaching courses (e.g., JavaScript, TypeScript, NodeJs)"
-            required={true}
+            
             isMulti={true}
             isCreatable={true}
             errorMessage={formErrors?.preferredCoursesToTeach}
