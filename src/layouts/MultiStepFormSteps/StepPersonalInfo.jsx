@@ -118,7 +118,7 @@ const StepPersonalInfo = ({
             errorMessage={formErrors.personalPhoto}
           />
         </div>
-        {console.log(formData)}
+        
       </div>
     </div>
   );
