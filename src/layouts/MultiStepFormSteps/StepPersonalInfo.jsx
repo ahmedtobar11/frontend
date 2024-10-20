@@ -86,8 +86,8 @@ const StepPersonalInfo = ({
         <div>
           <SelectComponent
             options={options}
-            placeholder="Select or Create your city of birth"
-            label="City Of Birth"
+            placeholder="Select or Add your city of birth"
+            label="City of Birth"
             onChange={(selectedOption) =>
               handleSelectChange(selectedOption, "cityOfBirth", setFormData)
             }

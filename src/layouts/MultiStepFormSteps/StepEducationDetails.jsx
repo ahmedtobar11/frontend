@@ -6,6 +6,7 @@ import {
 import Data from "../../SelectOption.json";
 import SelectComponent from "../../components/Ui/SelectComponent";
 import { useBranchesAndTracks } from "../../contexts/BranchesAndTracksContext";
+import { useEffect } from "react";
 
 const StepEducationDetails = ({
   formData,
@@ -46,12 +47,71 @@ const StepEducationDetails = ({
     value: name,
     label: name,
   }));
-  const isRoundDisabled =
-    !formData.program ||
-    formData.program === "Professional Training Program - (9 Months)";
-  const isIntakeDisabled =
-    !formData.program ||
-    formData.program === "Intensive Code Camp - (4 Months)";
+
+  const currentYear = new Date().getFullYear();
+  const graduationYearOptions = Array.from(
+    { length: currentYear - 1993 },
+    (_, index) => ({
+      value: currentYear - index,
+      label: (currentYear - index).toString(),
+    })
+  );
+
+  const initialIntakeYear = 1980;
+  const intakeCount = currentYear - initialIntakeYear;
+  const intakeYearsOptions = Array.from(
+    { length: intakeCount },
+    (_, index) => ({
+      value: intakeCount - index,
+      label: (intakeCount - index).toString(),
+    })
+  );
+
+  const PROFESSIONAL_TRAINING = "Professional Training Program - (9 Months)";
+  const INTENSIVE_CODE_CAMP = "Intensive Code Camp - (4 Months)";
+
+  const isProfessionalTraining = formData.program === PROFESSIONAL_TRAINING;
+  const isIntensiveCodeCamp = formData.program === INTENSIVE_CODE_CAMP;
+
+  const isRoundDisabled = !formData.program || isProfessionalTraining;
+  const isIntakeDisabled = !formData.program || isIntensiveCodeCamp;
+
+  // Clear conditional fields when program changes
+  useEffect(() => {
+    if (formData.program) {
+      const updatedFormData = { ...formData };
+
+      if (isProfessionalTraining) {
+        updatedFormData.round = "";
+      }
+
+      if (isIntensiveCodeCamp) {
+        updatedFormData.intake = null;
+      }
+
+      if (!formData.program) {
+        updatedFormData.round = "";
+        updatedFormData.intake = "";
+      }
+
+      setFormData(updatedFormData);
+    }
+  }, [formData.program]);
+
+  const handleProgramChange = (selectedOption) => {
+    const newProgram = selectedOption?.value;
+
+    setFormData((prev) => {
+      const updated = {
+        ...prev,
+        program: newProgram,
+        round: newProgram === PROFESSIONAL_TRAINING ? "" : prev.round,
+        intake: newProgram === INTENSIVE_CODE_CAMP ? "" : prev.intake,
+      };
+      return updated;
+    });
+  };
+
   return (
     <div className="space-y-6 lg:space-y-10">
       <h1 className="font-bold text-2xl text-center w-full text-main">
@@ -68,7 +128,9 @@ const StepEducationDetails = ({
               }
               onBlur={() => handleSelectBlur("university", formData.university)}
               value={
-                optionsUniversity.find((option) => option.value === formData.university) ||
+                optionsUniversity.find(
+                  (option) => option.value === formData.university
+                ) ||
                 (formData.university
                   ? { value: formData.university, label: formData.university }
                   : null)
@@ -88,7 +150,9 @@ const StepEducationDetails = ({
               }
               onBlur={() => handleSelectBlur("faculty", formData.faculty)}
               value={
-                optionsFactualy.find((option) => option.value === formData.faculty) ||
+                optionsFactualy.find(
+                  (option) => option.value === formData.faculty
+                ) ||
                 (formData.faculty
                   ? { value: formData.faculty, label: formData.faculty }
                   : null)
@@ -104,7 +168,7 @@ const StepEducationDetails = ({
           <div className="xl:flex xl:space-x-4">
             <SelectComponent
               options={optionbranch}
-              label="ITI branch you Graduted from"
+              label="ITI Branch You Graduated From"
               onChange={(selectedOption) =>
                 handleSelectChange(selectedOption, "branch", setFormData)
               }
@@ -119,17 +183,32 @@ const StepEducationDetails = ({
               required
               errorMessage={formErrors.branch}
             />
-            <Input
-              label="Graduation Year From ITI"
-              id="itiGraduationYear"
+
+            <SelectComponent
+              options={graduationYearOptions}
+              label="Graduation Year from ITI"
+              onChange={(selectedOption) =>
+                handleSelectChange(
+                  selectedOption,
+                  "itiGraduationYear",
+                  setFormData
+                )
+              }
+              onBlur={() =>
+                handleSelectBlur(
+                  "itiGraduationYear",
+                  formData.itiGraduationYear
+                )
+              }
+              value={
+                graduationYearOptions.find(
+                  (option) => option.value === formData.itiGraduationYear
+                ) || null
+              }
               name="itiGraduationYear"
-              value={formData.itiGraduationYear}
-              placeholder="Enter your ITI graduation year"
-              onChange={(e) => handleInputChange(e, setFormData)}
-              onBlur={(e) => handleBlur(e)}
+              placeholder="Select your ITI graduation year"
               required
               errorMessage={formErrors.itiGraduationYear}
-              type="Number"
             />
           </div>
 
@@ -137,9 +216,7 @@ const StepEducationDetails = ({
             <SelectComponent
               options={optionsProgram}
               label="Program"
-              onChange={(selectedOption) =>
-                handleSelectChange(selectedOption, "program", setFormData)
-              }
+              onChange={handleProgramChange}
               onBlur={() => handleSelectBlur("program", formData.program)}
               value={
                 optionsProgram?.find(
@@ -158,41 +235,37 @@ const StepEducationDetails = ({
               options={optionsRound}
               label="Round"
               onChange={(selectedOption) =>
-                handleSelectChange(
-                  selectedOption,
-                  "round",
-                  setFormData,
-                  formData
-                )
+                handleSelectChange(selectedOption, "round", setFormData)
               }
               onBlur={() => handleSelectBlur("round", formData.round)}
               value={
-                isRoundDisabled
-                  ? (formData.round = "")
-                  : optionsRound?.find(
-                      (option) => option.value === formData.round
-                    ) || null
+                optionsRound?.find(
+                  (option) => option.value === formData.round
+                ) || null
               }
-              name="intake"
+              name="round"
               placeholder="Select your round"
-              required
-              errorMessage={isRoundDisabled === true ? null : formErrors.round}
+              required={!isRoundDisabled}
+              errorMessage={isRoundDisabled ? null : formErrors.round}
               disabled={isRoundDisabled}
             />
 
-            <Input
+            <SelectComponent
+              options={intakeYearsOptions}
               label="Intake"
-              id="intake"
-              name="intake"
-              value={isIntakeDisabled ? (formData.intake = 0) : formData.intake}
-              placeholder="Enter your intake"
-              onChange={(e) => handleInputChange(e, setFormData, formData)}
-              onBlur={(e) => handleBlur(e)}
-              required
-              errorMessage={
-                isIntakeDisabled === true ? null : formErrors.intake
+              onChange={(selectedOption) =>
+                handleSelectChange(selectedOption, "intake", setFormData)
               }
-              type="Number"
+              onBlur={() => handleSelectBlur("intake", formData.intake)}
+              value={
+                intakeYearsOptions.find(
+                  (option) => option.value === formData.intake
+                ) || null
+              }
+              name="intake"
+              placeholder="Select your intake"
+              required={!isIntakeDisabled}
+              errorMessage={isIntakeDisabled ? null : formErrors.intake}
               disabled={isIntakeDisabled}
             />
           </div>

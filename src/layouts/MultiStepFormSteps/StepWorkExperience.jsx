@@ -18,65 +18,65 @@ const StepWorkExperience = ({
   }));
   return (
     <div className="space-y-0">
-      <h1 className="font-bold text-2xl text-center w-full text-main mb-10">
+      <h1 className="font-bold text-2xl text-center w-full text-main">
         Work Experience
       </h1>
-
-      <div className="w-max-xl  md:px-10 flex flex-col items-start ">
-        <div className=" w-[270px] flex mt-3 ">
-          <Input
-            label="Have Freelance Experience?"
-            id="hasFreelanceExperience"
-            name="hasFreelanceExperience"
-            type="checkbox"
-            className="flex flex-row-reverse  gap-x-2  "
-            checked={formData.hasFreelanceExperience}
-            onChange={(e) => handleInputChange(e, setFormData)}
-            style={{ width: "25px", height: "25px" }}
-          />
-        </div>
-        <SelectComponent
-          options={optionsFreelancingIncome}
-          label="You Freelancing Income"
-          onChange={(selectedOption) =>
-            handleSelectChange(selectedOption, "freelancingIncome", setFormData)
-          }
-          value={
-            formData.hasFreelanceExperience
-              ? optionsFreelancingIncome?.find(
-                  (option) => option.value === formData.freelancingIncome
-                ) || null
-              : (formData.freelancingIncome = "")
-          }
-          onBlur={() =>
-            handleSelectBlur("freelancingIncome", formData.freelancingIncome)
-          }
-          name="freelancingIncome"
-          placeholder="FreeLancing Income"
-          required={formData.isFreelancer === true}
-          errorMessage={
-            formData.hasFreelanceExperience === true
-              ? formErrors.freelancingIncome
-              : null
-          }
-          disabled={formData.hasFreelanceExperience === true ? false : true}
+      <div className="flex justify-center gap-12 w-full  ">
+        <Input
+          label="Freelancer"
+          id="hasFreelanceExperience"
+          name="hasFreelanceExperience"
+          type="checkbox"
+          className="flex flex-row-reverse gap-2  w-32 py-3  justify-center"
+          checked={formData.hasFreelanceExperience}
+          onChange={(e) => handleInputChange(e, setFormData)}
         />
-      </div>
-      <div className="w-max-xl  md:px-10 flex flex-col items-start ">
-        <div className=" w-[300px] flex  ">
+        {
           <Input
-            label="Have Employment Experience?"
+            label="Employed"
             id="isEmployed"
             name="isEmployed"
             type="checkbox"
-            className="flex flex-row-reverse gap-2 justify-center"
+            className="flex flex-row-reverse gap-2   w-32 py-3 justify-center"
             checked={formData.isEmployed}
             onChange={(e) => handleInputChange(e, setFormData)}
-            style={{ width: "25px", height: "25px" }}
+          />
+        }
+      </div>
+
+      <div className="w-max-xl md:px-5">
+        <div>
+          <SelectComponent
+            options={optionsFreelancingIncome}
+            label="You Freelancing Income"
+            onChange={(selectedOption) =>
+              handleSelectChange(
+                selectedOption,
+                "freelancingIncome",
+                setFormData
+              )
+            }
+            value={
+              formData.hasFreelanceExperience
+                ? optionsFreelancingIncome?.find(
+                    (option) => option.value === formData.freelancingIncome
+                  ) || null
+                : (formData.freelancingIncome = "")
+            }
+            onBlur={() =>
+              handleSelectBlur("freelancingIncome", formData.freelancingIncome)
+            }
+            name="freelancingIncome"
+            placeholder="FreeLancing Income"
+            required={formData.isFreelancer === true}
+            errorMessage={
+              formData.hasFreelanceExperience === true
+                ? formErrors.freelancingIncome
+                : null
+            }
+            disabled={formData.hasFreelanceExperience === true ? false : true}
           />
         </div>
-      </div>
-      <div className="w-max-xl md:px-10">
         <div>
           <Input
             label="Job Title"

@@ -5,7 +5,6 @@ import Button from "../components/Ui/Button";
 import registrationApiRequest from "../services/apiRequests/registrationApiRequest";
 import stepValidationSchemas from "../../utils/validations/graduationSchema";
 import { Phone, Mail } from "lucide-react";
-
 import Swal from "sweetalert2";
 
 const MultiStepForm = () => {
@@ -20,7 +19,7 @@ const MultiStepForm = () => {
     university: "",
     trackName: "",
     branch: "",
-    itiGraduationYear: 0,
+    itiGraduationYear: null,
     preferredTeachingBranches: [],
     preferredCoursesToTeach: [],
     fullJobTitle: "",
@@ -28,7 +27,7 @@ const MultiStepForm = () => {
     yearsOfExperience: 0,
     hasFreelanceExperience: false,
     program: "",
-    intake: "",
+    intake: null,
     interestedInTeaching: "",
     linkedin: "",
     isEmployed: false,
@@ -38,18 +37,48 @@ const MultiStepForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const shouldValidateField = (fieldName, programValue) => {
+    const PROFESSIONAL_TRAINING = "Professional Training Program - (9 Months)";
+    const INTENSIVE_CODE_CAMP = "Intensive Code Camp - (4 Months)";
+
+    if (!programValue) return true;
+
+    switch (fieldName) {
+      case "round":
+        return programValue !== PROFESSIONAL_TRAINING;
+      case "intake":
+        return programValue !== INTENSIVE_CODE_CAMP;
+      default:
+        return true;
+    }
+  };
+
   const validateStep = async (currentStep, formData) => {
     try {
-      await stepValidationSchemas[currentStep].validate(formData, {
-        abortEarly: false,
-      });
+      const schema = stepValidationSchemas[currentStep];
+
+      if (currentStep === 1) {
+        const validationData = { ...formData };
+        if (!shouldValidateField("round", formData.program)) {
+          delete validationData.round;
+        }
+        if (!shouldValidateField("intake", formData.program)) {
+          delete validationData.intake;
+        }
+
+        await schema.validate(validationData, { abortEarly: false });
+      } else {
+        await schema.validate(formData, { abortEarly: false });
+      }
 
       return {};
     } catch (err) {
       const errors = {};
 
       err.inner.forEach((error) => {
-        errors[error.path] = error.message;
+        if (shouldValidateField(error.path, formData.program)) {
+          errors[error.path] = error.message;
+        }
       });
 
       return errors;
@@ -76,28 +105,31 @@ const MultiStepForm = () => {
     const { name, value, type } = e.target;
     const newValue =
       type === "number" && (value === "" || isNaN(value)) ? 0 : value;
+    if (shouldValidateField(name, formData.program)) {
+      const errors = await validateStep(currentStep, {
+        ...formData,
+        [name]: newValue,
+      });
 
-    const errors = await validateStep(currentStep, {
-      ...formData,
-      [name]: newValue,
-    });
-
-    setFormErrors((prev) => ({
-      ...prev,
-      [name]: errors[name] || "",
-    }));
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: errors[name] || "",
+      }));
+    }
   };
 
   const handleSelectBlur = async (name, value) => {
-    const errors = await validateStep(currentStep, {
-      ...formData,
-      [name]: value,
-    });
+    if (shouldValidateField(name, formData.program)) {
+      const errors = await validateStep(currentStep, {
+        ...formData,
+        [name]: value,
+      });
 
-    setFormErrors((prev) => ({
-      ...prev,
-      [name]: errors[name] || "",
-    }));
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: errors[name] || "",
+      }));
+    }
   };
 
   const handleSubmit = async () => {

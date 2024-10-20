@@ -36,8 +36,9 @@ const Input = forwardRef(
           <div className="flex items-center justify-between mb-1.5">
             <label
               htmlFor={inputId}
-              className={`block text-lg font-bold  ${disabled ? "text-gray-400" : "text-gray-700"
-                }`}
+              className={`block text-lg font-bold  ${
+                disabled ? "text-gray-400" : "text-gray-700"
+              }`}
             >
               {label}
               {required && <span className="text-red-500 ml-1">*</span>}
@@ -71,9 +72,11 @@ const Input = forwardRef(
             checked={checked}
             style={style}
             aria-invalid={!!errorMessage}
-            aria-describedby={`${errorMessage ? errorId : ""} ${helpText ? helpTextId : ""
-              } ${ariaDescribedBy || ""}`}
-            className={`${type === "file"
+            aria-describedby={`${errorMessage ? errorId : ""} ${
+              helpText ? helpTextId : ""
+            } ${ariaDescribedBy || ""}`}
+            className={`${
+              type === "file"
                 ? `file:bg-gradient-to-b file:from-main-light file:to-red-400
           file:px-6 file:py-3 file:mt-2 file:mr-5
           file:border-none file:rounded-lg
@@ -88,33 +91,35 @@ const Input = forwardRef(
           p-2
 `
                 : type === "checkbox" || type === "radio"
-                  ? "h-12 mt-1"
-                  : `block w-full px-3 py-2 h-12
+                ? "h-12 mt-1"
+                : `block w-full px-3 py-2 h-12
                   border rounded-md shadow-sm 
-                  text-sm text-main
+                  text-sm text-gray-900
                  
                   placeholder:text-gray-400
                   disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
-                  ${errorMessage
-                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "border-gray-300 focus:ring-main focus:border-main"
+                  ${
+                    errorMessage
+                      ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:ring-main focus:border-main"
                   }
                   ${readOnly ? "bg-gray-50 cursor-default" : ""}
                   focus:outline-none focus:ring-2 
                   transition-colors duration-200`
-              }
+            }
           `}
           />
           {type === "password" && value && (
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               <div className="h-1.5 flex space-x-1">
                 <div
-                  className={`w-6 h-full rounded-full ${value.length < 8
+                  className={`w-6 h-full rounded-full ${
+                    value.length < 8
                       ? "bg-red-400"
                       : value.length < 12
-                        ? "bg-yellow-400"
-                        : "bg-green-400"
-                    }`}
+                      ? "bg-yellow-400"
+                      : "bg-green-400"
+                  }`}
                 />
               </div>
             </div>
