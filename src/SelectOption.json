@@ -1,120 +1,112 @@
 {
   "CityOfEgypt": [
     {
+      "value": "Cairo",
+      "label": "Cairo"
+    },
+    {
+      "value": "Alexandria",
+      "label": "Alexandria"
+    },
+    {
+      "value": "Giza",
+      "label": "Giza"
+    },
+    {
+      "value": "Qalyubia",
+      "label": "Qalyubia"
+    },
+    {
+      "value": "Gharbia",
+      "label": "Gharbia"
+    },
+    {
+      "value": "Monufia",
+      "label": "Monufia"
+    },
+    {
+      "value": "Dakahlia",
+      "label": "Dakahlia"
+    },
+    {
+      "value": "Sharqia",
+      "label": "Sharqia"
+    },
+    {
+      "value": "Kafr El Sheikh",
+      "label": "Kafr El Sheikh"
+    },
+    {
+      "value": "Beheira",
+      "label": "Beheira"
+    },
+    {
+      "value": "Matruh",
+      "label": "Matruh"
+    },
+    {
+      "value": "Suez",
+      "label": "Suez"
+    },
+    {
+      "value": "Port Said",
+      "label": "Port Said"
+    },
+    {
+      "value": "Ismailia",
+      "label": "Ismailia"
+    },
+    {
+      "value": "South Sinai",
+      "label": "South Sinai"
+    },
+    {
+      "value": "North Sinai",
+      "label": "North Sinai"
+    },
+    {
+      "value": "Red Sea",
+      "label": "Red Sea"
+    },
+    {
+      "value": "Aswan",
+      "label": "Aswan"
+    },
+    {
+      "value": "Luxor",
+      "label": "Luxor"
+    },
+    {
+      "value": "Qena",
+      "label": "Qena"
+    },
+    {
+      "value": "Assiut",
+      "label": "Assiut"
+    },
+    {
+      "value": "Minya",
+      "label": "Minya"
+    },
+    {
+      "value": "Fayoum",
+      "label": "Fayoum"
+    },
+    {
+      "value": "Beni Suef",
+      "label": "Beni Suef"
+    },
+    {
+      "value": "Sohag",
+      "label": "Sohag"
+    },
+    {
       "value": "Damietta",
       "label": "Damietta"
     },
     {
       "value": "The New Valley",
       "label": "The New Valley"
-    },
-    {
-      "value": "cairo",
-      "label": "Cairo"
-    },
-    {
-      "value": "alexandria",
-      "label": "Alexandria"
-    },
-    {
-      "value": "giza",
-      "label": "Giza"
-    },
-    {
-      "value": "qalyubia",
-      "label": "Qalyubia"
-    },
-    {
-      "value": "gharbia",
-      "label": "Gharbia"
-    },
-    {
-      "value": "monufia",
-      "label": "Monufia"
-    },
-    {
-      "value": "dakahlia",
-      "label": "Dakahlia"
-    },
-    {
-      "value": "sharqia",
-      "label": "Sharqia"
-    },
-    {
-      "value": "kafr El Sheikh",
-      "label": "Kafr El Sheikh"
-    },
-    {
-      "value": "behira",
-      "label": "Beheira"
-    },
-    {
-      "value": "matruh",
-      "label": "Matruh"
-    },
-    {
-      "value": "suez",
-      "label": "Suez"
-    },
-    {
-      "value": "port Said",
-      "label": "Port Said"
-    },
-    {
-      "value": "ismailia",
-      "label": "Ismailia"
-    },
-    {
-      "value": "south Sinai",
-      "label": "South Sinai"
-    },
-    {
-      "value": "north Sinai",
-      "label": "North Sinai"
-    },
-    {
-      "value": "red Sea",
-      "label": "Red Sea"
-    },
-    {
-      "value": "aswan",
-      "label": "Aswan"
-    },
-    {
-      "value": "luxor",
-      "label": "Luxor"
-    },
-    {
-      "value": "qena",
-      "label": "Qena"
-    },
-    {
-      "value": "assiut",
-      "label": "Assiut"
-    },
-    {
-      "value": "mina",
-      "label": "Minya"
-    },
-    {
-      "value": "fayoum",
-      "label": "Fayoum"
-    },
-    {
-      "value": "bani Suef",
-      "label": "Beni Suef"
-    },
-    {
-      "value": "sohag",
-      "label": "Sohag"
-    },
-    {
-      "value": "damietta",
-      "label": "Damietta"
-    },
-    {
-      "value": "dakahlia",
-      "label": "Dakahlia"
     }
   ],
   "Universities": [
