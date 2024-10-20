@@ -5,7 +5,9 @@ import {
 } from "../../services/registerFormUtils";
 import Data from "../../SelectOption.json";
 import SelectComponent from "../../components/Ui/SelectComponent";
-import { useBranchesAndTracks } from "../../contexts/BranchesAndTracksContext";
+import { useErrorModel } from "../../contexts/ErrorModelProvider"; 
+import ErrorModel from "../../components/errorModel/errorModel";
+import Loading from "../../components/Ui/Loading"; 
 
 const StepEducationDetails = ({
   formData,
@@ -14,7 +16,7 @@ const StepEducationDetails = ({
   handleBlur,
   handleSelectBlur,
 }) => {
-  const { tracks, branches } = useBranchesAndTracks();
+const { isLoading,tracks, branches } = useErrorModel()
 
   const optionsUniversity = Data.Universities?.map((university) => ({
     value: university.value,
@@ -52,8 +54,11 @@ const StepEducationDetails = ({
   const isIntakeDisabled =
     !formData.program ||
     formData.program === "Intensive Code Camp - (4 Months)";
+    
+    if (isLoading) return <Loading />;
+
   return (
-    <div className="space-y-6 lg:space-y-0">
+    <><ErrorModel /><div className="space-y-6 lg:space-y-0">
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Education Details
       </h1>
@@ -63,62 +68,47 @@ const StepEducationDetails = ({
             <SelectComponent
               options={optionsUniversity}
               label="University"
-              onChange={(selectedOption) =>
-                handleSelectChange(selectedOption, "university", setFormData)
-              }
+              onChange={(selectedOption) => handleSelectChange(selectedOption, "university", setFormData)}
               onBlur={() => handleSelectBlur("university", formData.university)}
-              value={
-                optionsUniversity.find((option) => option.value === formData.university) ||
+              value={optionsUniversity.find((option) => option.value === formData.university) ||
                 (formData.university
                   ? { value: formData.university, label: formData.university }
-                  : null)
-              }
+                  : null)}
               name="university"
               placeholder="Select your university"
               isCreatable
               required
-              errorMessage={formErrors.university}
-            />
+              errorMessage={formErrors.university} />
 
             <SelectComponent
               options={optionsFactualy}
               label="Faculty"
-              onChange={(selectedOption) =>
-                handleSelectChange(selectedOption, "faculty", setFormData)
-              }
+              onChange={(selectedOption) => handleSelectChange(selectedOption, "faculty", setFormData)}
               onBlur={() => handleSelectBlur("faculty", formData.faculty)}
-              value={
-                optionsFactualy.find((option) => option.value === formData.faculty) ||
+              value={optionsFactualy.find((option) => option.value === formData.faculty) ||
                 (formData.faculty
                   ? { value: formData.faculty, label: formData.faculty }
-                  : null)
-              }
+                  : null)}
               name="faculty"
               placeholder="Select your faculty"
               isCreatable
               required
-              errorMessage={formErrors.faculty}
-            />
+              errorMessage={formErrors.faculty} />
           </div>
 
           <div className="xl:flex xl:space-x-4">
             <SelectComponent
               options={optionbranch}
               label="ITI branch you Graduted from"
-              onChange={(selectedOption) =>
-                handleSelectChange(selectedOption, "branch", setFormData)
-              }
+              onChange={(selectedOption) => handleSelectChange(selectedOption, "branch", setFormData)}
               onBlur={() => handleSelectBlur("branch", formData.branch)}
-              value={
-                optionbranch?.find(
-                  (option) => option.value === formData.branch
-                ) || null
-              }
+              value={optionbranch?.find(
+                (option) => option.value === formData.branch
+              ) || null}
               name="branch"
               placeholder="Select your ITI branch"
               required
-              errorMessage={formErrors.branch}
-            />
+              errorMessage={formErrors.branch} />
             <Input
               label="Graduation Year From ITI"
               id="itiGraduationYear"
@@ -129,56 +119,45 @@ const StepEducationDetails = ({
               onBlur={(e) => handleBlur(e)}
               required
               errorMessage={formErrors.itiGraduationYear}
-              type="Number"
-            />
+              type="Number" />
           </div>
 
           <div>
             <SelectComponent
               options={optionsProgram}
               label="Program"
-              onChange={(selectedOption) =>
-                handleSelectChange(selectedOption, "program", setFormData)
-              }
+              onChange={(selectedOption) => handleSelectChange(selectedOption, "program", setFormData)}
               onBlur={() => handleSelectBlur("program", formData.program)}
-              value={
-                optionsProgram?.find(
-                  (option) => option.value === formData.program
-                ) || null
-              }
+              value={optionsProgram?.find(
+                (option) => option.value === formData.program
+              ) || null}
               name="program"
               placeholder="Select your program"
               required
-              errorMessage={formErrors.program}
-            />
+              errorMessage={formErrors.program} />
           </div>
 
           <div className="flex space-x-4">
             <SelectComponent
               options={optionsRound}
               label="Round"
-              onChange={(selectedOption) =>
-                handleSelectChange(
-                  selectedOption,
-                  "round",
-                  setFormData,
-                  formData
-                )
-              }
+              onChange={(selectedOption) => handleSelectChange(
+                selectedOption,
+                "round",
+                setFormData,
+                formData
+              )}
               onBlur={() => handleSelectBlur("round", formData.round)}
-              value={
-                isRoundDisabled
-                  ? (formData.round = "")
-                  : optionsRound?.find(
-                      (option) => option.value === formData.round
-                    ) || null
-              }
+              value={isRoundDisabled
+                ? (formData.round = "")
+                : optionsRound?.find(
+                  (option) => option.value === formData.round
+                ) || null}
               name="intake"
               placeholder="Select your round"
               required
               errorMessage={isRoundDisabled === true ? null : formErrors.round}
-              disabled={isRoundDisabled}
-            />
+              disabled={isRoundDisabled} />
 
             <Input
               label="Intake"
@@ -189,36 +168,28 @@ const StepEducationDetails = ({
               onChange={(e) => handleInputChange(e, setFormData, formData)}
               onBlur={(e) => handleBlur(e)}
               required
-              errorMessage={
-                isIntakeDisabled === true ? null : formErrors.intake
-              }
+              errorMessage={isIntakeDisabled === true ? null : formErrors.intake}
               type="Number"
-              disabled={isIntakeDisabled}
-            />
+              disabled={isIntakeDisabled} />
           </div>
 
           <div>
             <SelectComponent
               options={optionTrack}
               label="Track"
-              onChange={(selectedOption) =>
-                handleSelectChange(selectedOption, "trackName", setFormData)
-              }
+              onChange={(selectedOption) => handleSelectChange(selectedOption, "trackName", setFormData)}
               onBlur={() => handleSelectBlur("trackName", formData.trackName)}
-              value={
-                optionTrack?.find(
-                  (option) => option.value === formData.trackName
-                ) || null
-              }
+              value={optionTrack?.find(
+                (option) => option.value === formData.trackName
+              ) || null}
               name="trackName"
               placeholder="Select your track"
               required
-              errorMessage={formErrors.trackName}
-            />
+              errorMessage={formErrors.trackName} />
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 
