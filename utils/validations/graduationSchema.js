@@ -179,7 +179,7 @@ const stepValidationSchemas = [
     fullJobTitle: createEmploymentTest("Job title"),
     companyName: createEmploymentTest("Company name"),
 
-    yearsOfExperience: Yup.number().test(
+   yearsOfExperience: Yup.number().test(
       "is-employed",
       "Years of experience is required if you are employed.",
       function (value) {

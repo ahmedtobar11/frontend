@@ -5,6 +5,7 @@ import {
   handleSelectChange,
 } from "../../services/registerFormUtils";
 import Data from "../../SelectOption.json";
+
 import SelectComponent from "../../components/Ui/SelectComponent";
 const StepPersonalInfo = ({
   formData,
@@ -45,7 +46,7 @@ const StepPersonalInfo = ({
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Personal Information
       </h1>
-      <div className="w-max-xl px-10">
+      <div className="w-max-xl md:px-10 pb-5 lg:pb-5">
         <div className="flex flex-col lg:flex-row lg:gap-10">
           {renderInput(
             "Full Name",
@@ -117,6 +118,7 @@ const StepPersonalInfo = ({
             errorMessage={formErrors.personalPhoto}
           />
         </div>
+        
       </div>
     </div>
   );

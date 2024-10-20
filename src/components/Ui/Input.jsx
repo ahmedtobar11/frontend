@@ -21,6 +21,7 @@ const Input = forwardRef(
       readOnly = false,
       checked = false,
       onBlur,
+      style,
       "aria-describedby": ariaDescribedBy,
     },
     ref
@@ -69,6 +70,7 @@ const Input = forwardRef(
             readOnly={readOnly}
             onBlur={onBlur}
             checked={checked}
+            style={style}
             aria-invalid={!!errorMessage}
             aria-describedby={`${errorMessage ? errorId : ""} ${
               helpText ? helpTextId : ""

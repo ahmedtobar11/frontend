@@ -31,11 +31,11 @@ const StepIndicator = ({ currentStep }) => {
       </div>
 
       <div className="md:hidden overflow-x-hidden py-4 flex justify-center">
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex  justify-center gap-2">
         {steps.map((step, index) => (
           <div
             key={step}
-            className={`flex flex-col items-center ${
+            className={`flex flex-col  sm:items-start  ms-3 ${
               currentStep === index
                 ? "text-main scale-105 font-semibold"
                 : "font-medium"
