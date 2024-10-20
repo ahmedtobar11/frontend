@@ -119,7 +119,7 @@ const MultiStepForm = () => {
   };
 
   const handleSelectBlur = async (name, value) => {
-    if (shouldValidateField(name, formData.program)) {
+    if (value && shouldValidateField(name, formData.program)) {
       const errors = await validateStep(currentStep, {
         ...formData,
         [name]: value,
@@ -128,6 +128,11 @@ const MultiStepForm = () => {
       setFormErrors((prev) => ({
         ...prev,
         [name]: errors[name] || "",
+      }));
+    } else {
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: "",
       }));
     }
   };
