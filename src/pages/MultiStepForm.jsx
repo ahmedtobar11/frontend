@@ -22,7 +22,7 @@ const MultiStepForm = () => {
     branch: "",
     itiGraduationYear: 0,
     preferredTeachingBranches: [],
-    preferredCoursesToTeach: "",
+    preferredCoursesToTeach: [],
     fullJobTitle: "",
     companyName: "",
     yearsOfExperience: 0,
@@ -149,7 +149,7 @@ const MultiStepForm = () => {
   };
   return (
     <>
-      <div className="md:flex  bg-light-dark h-6 px-2 text-text hidden lg:flex justify-end  ">
+      <div className="md:flex  bg-main-light h-6 px-2 text-text hidden lg:flex justify-end  ">
         <div className="text-main font-bold w-64   mr-8 flex justify-between ">
           <a
             href="tel:17002"
@@ -162,14 +162,14 @@ const MultiStepForm = () => {
       </div>
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
         <nav className="w-full md:hidden bg-main-light p-2 sm:p-3">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
+          <div className="flex flex-row justify-between items-center">
             <img
               className="h-16 sm:h-14 mb-2 sm:mb-0"
               src="itiColoredLogo.svg"
               alt="ITI logo"
             />
-            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 text-main font-semibold text-xs sm:text-sm">
-              <a href="tel:17002" className="flex items-center">
+            <div className="flex flex-col  items-start space-y-2 sm:space-y-2  text-main font-semibold text-xs sm:text-sm">
+              <a href="tel:17002" className="flex  items-center">
                 <Phone size={14} className="mr-1 text-main" /> 17002
               </a>
               <a href="mailto:ITIinfo@iti.gov.eg" className="flex items-center">
@@ -198,7 +198,7 @@ const MultiStepForm = () => {
               handleSelectBlur
             )}
           </div>
-          <div className="flex md:justify-between px-10 items-start gap-8">
+          <div className="flex justify-between items-start md:px-10 md:gap-8 ">
             <Button
               onClick={() => handlePrevious(setCurrentStep)}
               text={"Previous"}

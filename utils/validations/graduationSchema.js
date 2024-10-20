@@ -94,13 +94,13 @@ const stepValidationSchemas = [
 
     intake: Yup.number().test(
       "intake-condition",
-      "The intake value must be greater than zero for the 9 Months program.",
+      "The intake value must be greater than zero and less than 100 ",
       function (value) {
         const { program } = this.parent;
 
         if (
           program === "Professional Training Program - (9 Months)" &&
-          (!value || value <= 0)
+          (!value || value <= 0 || value >99)
         ) {
           return false;
         }
@@ -162,9 +162,9 @@ const stepValidationSchemas = [
       "Years of experience is required if you are employed.",
       function (value) {
         return this.parent.isEmployed
-          ? value > 0 ||
+          ? (value > 0 && value < 100) ||
               this.createError({
-                message: "Years of experience must be greater than 0.",
+                message: "Years of experience must be greater than 0 less than 100.",
               })
           : true;
       }

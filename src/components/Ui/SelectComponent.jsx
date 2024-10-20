@@ -85,11 +85,12 @@ function SelectComponent(props) {
           onBlur={onBlur}
         />
       )}
-      {errorMessage && (
+      {errorMessage ? (
         <span id={`${name}-error`} className="text-red-500 text-sm mt-1">
           {errorMessage}
         </span>
-      )}
+      ):null}
+      
     </div>
   );
 }
