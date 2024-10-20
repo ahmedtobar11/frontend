@@ -5,7 +5,6 @@ import Button from "../components/Ui/Button";
 import registrationApiRequest from "../services/apiRequests/registrationApiRequest";
 import stepValidationSchemas from "../../utils/validations/graduationSchema";
 import { Phone, Mail } from "lucide-react";
-
 import Swal from "sweetalert2";
 
 const MultiStepForm = () => {
@@ -20,15 +19,15 @@ const MultiStepForm = () => {
     university: "",
     trackName: "",
     branch: "",
-    itiGraduationYear: 0,
+    itiGraduationYear: null,
     preferredTeachingBranches: [],
-    preferredCoursesToTeach: "",
+    preferredCoursesToTeach: [],
     fullJobTitle: "",
     companyName: "",
     yearsOfExperience: 0,
     hasFreelanceExperience: false,
     program: "",
-    intake: "",
+    intake: null,
     interestedInTeaching: "",
     linkedin: "",
     isEmployed: false,
@@ -38,18 +37,48 @@ const MultiStepForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const shouldValidateField = (fieldName, programValue) => {
+    const PROFESSIONAL_TRAINING = "Professional Training Program - (9 Months)";
+    const INTENSIVE_CODE_CAMP = "Intensive Code Camp - (4 Months)";
+
+    if (!programValue) return true;
+
+    switch (fieldName) {
+      case "round":
+        return programValue !== PROFESSIONAL_TRAINING;
+      case "intake":
+        return programValue !== INTENSIVE_CODE_CAMP;
+      default:
+        return true;
+    }
+  };
+
   const validateStep = async (currentStep, formData) => {
     try {
-      await stepValidationSchemas[currentStep].validate(formData, {
-        abortEarly: false,
-      });
+      const schema = stepValidationSchemas[currentStep];
+
+      if (currentStep === 1) {
+        const validationData = { ...formData };
+        if (!shouldValidateField("round", formData.program)) {
+          delete validationData.round;
+        }
+        if (!shouldValidateField("intake", formData.program)) {
+          delete validationData.intake;
+        }
+
+        await schema.validate(validationData, { abortEarly: false });
+      } else {
+        await schema.validate(formData, { abortEarly: false });
+      }
 
       return {};
     } catch (err) {
       const errors = {};
 
       err.inner.forEach((error) => {
-        errors[error.path] = error.message;
+        if (shouldValidateField(error.path, formData.program)) {
+          errors[error.path] = error.message;
+        }
       });
 
       return errors;
@@ -76,28 +105,36 @@ const MultiStepForm = () => {
     const { name, value, type } = e.target;
     const newValue =
       type === "number" && (value === "" || isNaN(value)) ? 0 : value;
+    if (shouldValidateField(name, formData.program)) {
+      const errors = await validateStep(currentStep, {
+        ...formData,
+        [name]: newValue,
+      });
 
-    const errors = await validateStep(currentStep, {
-      ...formData,
-      [name]: newValue,
-    });
-
-    setFormErrors((prev) => ({
-      ...prev,
-      [name]: errors[name] || "",
-    }));
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: errors[name] || "",
+      }));
+    }
   };
 
   const handleSelectBlur = async (name, value) => {
-    const errors = await validateStep(currentStep, {
-      ...formData,
-      [name]: value,
-    });
+    if (value && shouldValidateField(name, formData.program)) {
+      const errors = await validateStep(currentStep, {
+        ...formData,
+        [name]: value,
+      });
 
-    setFormErrors((prev) => ({
-      ...prev,
-      [name]: errors[name] || "",
-    }));
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: errors[name] || "",
+      }));
+    } else {
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
   };
 
   const handleSubmit = async () => {
@@ -149,7 +186,7 @@ const MultiStepForm = () => {
   };
   return (
     <>
-      <div className="md:flex  bg-light-dark h-6 px-2 text-text hidden lg:flex justify-end  ">
+      <div className="md:flex  bg-main-light h-6 px-2 text-text hidden lg:flex justify-end  ">
         <div className="text-main font-bold w-64   mr-8 flex justify-between ">
           <a
             href="tel:17002"
@@ -162,14 +199,14 @@ const MultiStepForm = () => {
       </div>
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
         <nav className="w-full md:hidden bg-main-light p-2 sm:p-3">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
+          <div className="flex flex-row justify-between items-center">
             <img
               className="h-16 sm:h-14 mb-2 sm:mb-0"
               src="itiColoredLogo.svg"
               alt="ITI logo"
             />
-            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 text-main font-semibold text-xs sm:text-sm">
-              <a href="tel:17002" className="flex items-center">
+            <div className="flex flex-col  items-start space-y-2 sm:space-y-2  text-main font-semibold text-xs sm:text-sm">
+              <a href="tel:17002" className="flex  items-center">
                 <Phone size={14} className="mr-1 text-main" /> 17002
               </a>
               <a href="mailto:ITIinfo@iti.gov.eg" className="flex items-center">
@@ -198,7 +235,7 @@ const MultiStepForm = () => {
               handleSelectBlur
             )}
           </div>
-          <div className="flex md:justify-between px-10 items-start gap-8">
+          <div className="flex justify-between items-start md:px-10 md:gap-8 ">
             <Button
               onClick={() => handlePrevious(setCurrentStep)}
               text={"Previous"}

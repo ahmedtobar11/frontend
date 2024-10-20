@@ -54,11 +54,8 @@ const { isLoading,tracks, branches } = useErrorModel()
   const isIntakeDisabled =
     !formData.program ||
     formData.program === "Intensive Code Camp - (4 Months)";
-    
-    if (isLoading) return <Loading />;
-
   return (
-    <><ErrorModel /><div className="space-y-6 lg:space-y-0">
+    <div className="space-y-6 lg:space-y-0">
       <h1 className="font-bold text-2xl text-center w-full text-main">
         Education Details
       </h1>
@@ -70,7 +67,8 @@ const { isLoading,tracks, branches } = useErrorModel()
               label="University"
               onChange={(selectedOption) => handleSelectChange(selectedOption, "university", setFormData)}
               onBlur={() => handleSelectBlur("university", formData.university)}
-              value={optionsUniversity.find((option) => option.value === formData.university) ||
+              value={
+                optionsUniversity.find((option) => option.value === formData.university) ||
                 (formData.university
                   ? { value: formData.university, label: formData.university }
                   : null)}
@@ -85,7 +83,8 @@ const { isLoading,tracks, branches } = useErrorModel()
               label="Faculty"
               onChange={(selectedOption) => handleSelectChange(selectedOption, "faculty", setFormData)}
               onBlur={() => handleSelectBlur("faculty", formData.faculty)}
-              value={optionsFactualy.find((option) => option.value === formData.faculty) ||
+              value={
+                optionsFactualy.find((option) => option.value === formData.faculty) ||
                 (formData.faculty
                   ? { value: formData.faculty, label: formData.faculty }
                   : null)}
@@ -100,7 +99,9 @@ const { isLoading,tracks, branches } = useErrorModel()
             <SelectComponent
               options={optionbranch}
               label="ITI branch you Graduted from"
-              onChange={(selectedOption) => handleSelectChange(selectedOption, "branch", setFormData)}
+              onChange={(selectedOption) =>
+                handleSelectChange(selectedOption, "branch", setFormData)
+              }
               onBlur={() => handleSelectBlur("branch", formData.branch)}
               value={optionbranch?.find(
                 (option) => option.value === formData.branch
@@ -108,25 +109,26 @@ const { isLoading,tracks, branches } = useErrorModel()
               name="branch"
               placeholder="Select your ITI branch"
               required
-              errorMessage={formErrors.branch} />
+              errorMessage={formErrors.branch}
+            />
             <Input
               label="Graduation Year From ITI"
               id="itiGraduationYear"
               name="itiGraduationYear"
-              value={formData.itiGraduationYear}
-              placeholder="Enter your ITI graduation year"
-              onChange={(e) => handleInputChange(e, setFormData)}
-              onBlur={(e) => handleBlur(e)}
+              placeholder="Select your ITI graduation year"
               required
               errorMessage={formErrors.itiGraduationYear}
-              type="Number" />
+              type="Number"
+            />
           </div>
 
           <div>
             <SelectComponent
               options={optionsProgram}
               label="Program"
-              onChange={(selectedOption) => handleSelectChange(selectedOption, "program", setFormData)}
+              onChange={(selectedOption) =>
+                handleSelectChange(selectedOption, "program", setFormData)
+              }
               onBlur={() => handleSelectBlur("program", formData.program)}
               value={optionsProgram?.find(
                 (option) => option.value === formData.program
@@ -141,36 +143,53 @@ const { isLoading,tracks, branches } = useErrorModel()
             <SelectComponent
               options={optionsRound}
               label="Round"
-              onChange={(selectedOption) => handleSelectChange(
-                selectedOption,
-                "round",
-                setFormData,
-                formData
-              )}
+              onChange={(selectedOption) =>
+                handleSelectChange(
+                  selectedOption,
+                  "round",
+                  setFormData,
+                  formData
+                )
+              }
               onBlur={() => handleSelectBlur("round", formData.round)}
-              value={isRoundDisabled
-                ? (formData.round = "")
-                : optionsRound?.find(
-                  (option) => option.value === formData.round
-                ) || null}
+              value={
+                isRoundDisabled
+                  ? (formData.round = "")
+                  : optionsRound?.find(
+                      (option) => option.value === formData.round
+                    ) || null
+              }
               name="intake"
               placeholder="Select your round"
               required
               errorMessage={isRoundDisabled === true ? null : formErrors.round}
-              disabled={isRoundDisabled} />
+              disabled={isRoundDisabled}
+            />
 
-            <Input
+            <SelectComponent
+              options={intakeYearsOptions}
               label="Intake"
-              id="intake"
+              onChange={(selectedOption) =>
+                handleSelectChange(selectedOption, "intake", setFormData)
+              }
+              onBlur={() => handleSelectBlur("intake", formData.intake)}
+              value={
+                intakeYearsOptions.find(
+                  (option) => option.value === formData.intake
+                ) || null
+              }
               name="intake"
               value={isIntakeDisabled ? (formData.intake = 0) : formData.intake}
               placeholder="Enter your intake"
               onChange={(e) => handleInputChange(e, setFormData, formData)}
               onBlur={(e) => handleBlur(e)}
               required
-              errorMessage={isIntakeDisabled === true ? null : formErrors.intake}
+              errorMessage={
+                isIntakeDisabled === true ? null : formErrors.intake
+              }
               type="Number"
-              disabled={isIntakeDisabled} />
+              disabled={isIntakeDisabled}
+            />
           </div>
 
           <div>

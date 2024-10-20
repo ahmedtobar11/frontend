@@ -7,6 +7,17 @@ const cityRegex = /^[A-Za-z][a-zA-Z\s]*$/;
 const facultyUniversityRegex = /^[a-zA-Z\s]+$/;
 const courseRegex = /^[a-zA-Z\s_-]*$/;
 
+const currentYear = new Date().getFullYear();
+const initialIntakeYear = 1980;
+const intakeCount = currentYear - initialIntakeYear;
+export const intakeYearsOptions = Array.from(
+  { length: intakeCount },
+  (_, index) => ({
+    value: intakeCount - index,
+    label: (intakeCount - index).toString(),
+  })
+);
+
 const createEmploymentTest = (fieldName) => {
   return Yup.string()
     .matches(
@@ -86,28 +97,34 @@ const stepValidationSchemas = [
 
     itiGraduationYear: Yup.number()
       .required("ITI Graduation Year is required.")
-      .min(2000, "Graduation year must be after 2000.")
+      .min(1994, "Graduation year must be after 1993.")
       .max(
         new Date().getFullYear(),
         `Graduation year must be less than or equal to ${new Date().getFullYear()}.`
       ),
 
-    intake: Yup.number().test(
-      "intake-condition",
-      "The intake value must be greater than zero for the 9 Months program.",
-      function (value) {
-        const { program } = this.parent;
+    intake: Yup.number()
+      .required("Intake is required.")
+      .oneOf(
+        intakeYearsOptions.map((option) => option.value),
+        "Invalid intake value."
+      )
+      .test(
+        "valid-intake",
+        "Invalid intake for the selected program.",
+        function (value) {
+          const { program } = this.parent;
 
-        if (
-          program === "Professional Training Program - (9 Months)" &&
-          (!value || value <= 0)
-        ) {
-          return false;
+          if (
+            program === "Professional Training Program - (9 Months)" &&
+            !value
+          ) {
+            return false;
+          }
+
+          return true;
         }
-
-        return true;
-      }
-    ),
+      ),
 
     round: Yup.string().test(
       "round-required-for-4-months",
@@ -133,15 +150,20 @@ const stepValidationSchemas = [
       .required("Preferred teaching branches are required."),
 
     preferredCoursesToTeach: Yup.array()
+      .transform((value, originalValue) => {
+        return typeof originalValue === "string" && originalValue === ""
+          ? []
+          : value;
+      })
+      .nullable()
       .test(
         "is-valid-course",
-        "Preferred courses must be in English and can include underscores and dashes.",
+        "Preferred courses can only include letters, numbers, underscores, dashes, and spaces.",
         (value) => {
           if (!value || value.length === 0) return true;
-          return value.every((course) => /^[a-zA-Z-_ ]*$/.test(course));
+          return value.every((course) => /^[a-zA-Z0-9-_ ]*$/.test(course));
         }
-      )
-      .optional(),
+      ),
 
     interestedInTeaching: Yup.string()
       .oneOf(
@@ -157,16 +179,22 @@ const stepValidationSchemas = [
     fullJobTitle: createEmploymentTest("Job title"),
     companyName: createEmploymentTest("Company name"),
 
-    yearsOfExperience: Yup.number().test(
+   yearsOfExperience: Yup.number().test(
       "is-employed",
       "Years of experience is required if you are employed.",
       function (value) {
-        return this.parent.isEmployed
-          ? value > 0 ||
-              this.createError({
-                message: "Years of experience must be greater than 0.",
-              })
-          : true;
+        const { isEmployed } = this.parent;
+
+        if (isEmployed) {
+          return (
+            (value >= 0 && value <= 50) ||
+            this.createError({
+              message: "Years of experience must be between 0 and 50.",
+            })
+          );
+        }
+
+        return true;
       }
     ),
 

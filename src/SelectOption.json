@@ -288,15 +288,15 @@
   "interestedInTeaching": [
     {
       "value": "Business sessions",
-      "label": "Business sessions"
+      "label": "Business sessions only"
     },
     {
       "value": "Courses",
-      "label": "Courses"
+      "label": "Courses only"
     },
     {
       "value": "Both",
-      "label": "Both"
+      "label": "Courses & Business sessions"
     }
   ],
   "round": [

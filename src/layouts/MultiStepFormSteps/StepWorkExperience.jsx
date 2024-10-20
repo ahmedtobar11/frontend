@@ -23,7 +23,7 @@ const StepWorkExperience = ({
       </h1>
       <div className="flex justify-center gap-12 w-full  ">
         <Input
-          label="Freelance Experience"
+          label="Freelancer"
           id="hasFreelanceExperience"
           name="hasFreelanceExperience"
           type="checkbox"
@@ -44,36 +44,39 @@ const StepWorkExperience = ({
         }
       </div>
 
-      <div>
-        <SelectComponent
-          options={optionsFreelancingIncome}
-          label="You Freelancing Income"
-          onChange={(selectedOption) =>
-            handleSelectChange(selectedOption, "freelancingIncome", setFormData)
-          }
-          value={
-            formData.hasFreelanceExperience
-              ? optionsFreelancingIncome?.find(
-                  (option) => option.value === formData.freelancingIncome
-                ) || null
-              : (formData.freelancingIncome = "")
-          }
-          onBlur={() =>
-            handleSelectBlur("freelancingIncome", formData.freelancingIncome)
-          }
-          name="freelancingIncome"
-          placeholder="FreeLancing Income"
-          required={formData.isFreelancer === true}
-          errorMessage={
-            formData.hasFreelanceExperience === true
-              ? formErrors.freelancingIncome
-              : null
-          }
-          disabled={formData.hasFreelanceExperience === true ? false : true}
-        />
-      </div>
-
       <div className="w-max-xl md:px-5">
+        <div>
+          <SelectComponent
+            options={optionsFreelancingIncome}
+            label="You Freelancing Income"
+            onChange={(selectedOption) =>
+              handleSelectChange(
+                selectedOption,
+                "freelancingIncome",
+                setFormData
+              )
+            }
+            value={
+              formData.hasFreelanceExperience
+                ? optionsFreelancingIncome?.find(
+                    (option) => option.value === formData.freelancingIncome
+                  ) || null
+                : (formData.freelancingIncome = "")
+            }
+            onBlur={() =>
+              handleSelectBlur("freelancingIncome", formData.freelancingIncome)
+            }
+            name="freelancingIncome"
+            placeholder="FreeLancing Income"
+            required={formData.isFreelancer === true}
+            errorMessage={
+              formData.hasFreelanceExperience === true
+                ? formErrors.freelancingIncome
+                : null
+            }
+            disabled={formData.hasFreelanceExperience === true ? false : true}
+          />
+        </div>
         <div>
           <Input
             label="Job Title"
