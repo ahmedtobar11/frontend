@@ -214,8 +214,8 @@ const MultiStepForm = () => {
         <aside className="shadow-md z-10 sticky top-0 w-full md:w-64 lg:w-80 mr-6  bg-main-light px-2 flex flex-col  gap-12  ">
           <StepIndicator currentStep={currentStep} />
           <img
-            className="hidden md:block self-center"
-            src="logo.png"
+            className="hidden md:block mt-28 self-center"
+            src="itiColoredLogo.svg"
             alt="logo"
           />
         </aside>
