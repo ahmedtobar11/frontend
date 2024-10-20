@@ -48,46 +48,45 @@ const StepPersonalInfo = ({
       <div className="w-max-xl px-10">
         <div className="flex flex-col lg:flex-row lg:gap-10">
           {renderInput(
-          "Full Name",
-          "fullName",
-          "fullName",
-          "text",
-          "Enter your full name",
-          true
-        )}
-        {renderInput(
-          "Mobile",
-          "mobile",
-          "mobile",
-          "text",
-          "Enter your mobile number",
-          true
-        )}
+            "Full Name",
+            "fullName",
+            "fullName",
+            "text",
+            "Enter your full name",
+            true
+          )}
+          {renderInput(
+            "Mobile",
+            "mobile",
+            "mobile",
+            "text",
+            "Enter your mobile number",
+            true
+          )}
         </div>
         <div className="flex flex-col lg:flex-row lg:gap-10">
-
-        {renderInput(
-          "Email",
-          "email",
-          "email",
-          "email",
-          "Enter your email address",
-          true
-        )}
-        {renderInput(
-          "LinkedIn",
-          "linkedin",
-          "linkedin",
-          "text",
-          "Enter your LinkedIn profile URL"
-        )}
+          {renderInput(
+            "Email",
+            "email",
+            "email",
+            "email",
+            "Enter your email address",
+            true
+          )}
+          {renderInput(
+            "LinkedIn",
+            "linkedin",
+            "linkedin",
+            "text",
+            "Enter your LinkedIn profile URL"
+          )}
         </div>
 
         <div>
           <SelectComponent
             options={options}
-            placeholder="Select or Create your city of birth"
-            label="City Of Birth"
+            placeholder="Select or Add your city of birth"
+            label="City of Birth"
             onChange={(selectedOption) =>
               handleSelectChange(selectedOption, "cityOfBirth", setFormData)
             }

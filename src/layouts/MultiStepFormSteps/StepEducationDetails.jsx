@@ -128,7 +128,9 @@ const StepEducationDetails = ({
               }
               onBlur={() => handleSelectBlur("university", formData.university)}
               value={
-                optionsUniversity.find((option) => option.value === formData.university) ||
+                optionsUniversity.find(
+                  (option) => option.value === formData.university
+                ) ||
                 (formData.university
                   ? { value: formData.university, label: formData.university }
                   : null)
@@ -148,7 +150,9 @@ const StepEducationDetails = ({
               }
               onBlur={() => handleSelectBlur("faculty", formData.faculty)}
               value={
-                optionsFactualy.find((option) => option.value === formData.faculty) ||
+                optionsFactualy.find(
+                  (option) => option.value === formData.faculty
+                ) ||
                 (formData.faculty
                   ? { value: formData.faculty, label: formData.faculty }
                   : null)
@@ -164,7 +168,7 @@ const StepEducationDetails = ({
           <div className="xl:flex xl:space-x-4">
             <SelectComponent
               options={optionbranch}
-              label="ITI branch you Graduted from"
+              label="ITI Branch You Graduated From"
               onChange={(selectedOption) =>
                 handleSelectChange(selectedOption, "branch", setFormData)
               }
@@ -179,17 +183,32 @@ const StepEducationDetails = ({
               required
               errorMessage={formErrors.branch}
             />
-            <Input
-              label="Graduation Year From ITI"
-              id="itiGraduationYear"
+
+            <SelectComponent
+              options={graduationYearOptions}
+              label="Graduation Year from ITI"
+              onChange={(selectedOption) =>
+                handleSelectChange(
+                  selectedOption,
+                  "itiGraduationYear",
+                  setFormData
+                )
+              }
+              onBlur={() =>
+                handleSelectBlur(
+                  "itiGraduationYear",
+                  formData.itiGraduationYear
+                )
+              }
+              value={
+                graduationYearOptions.find(
+                  (option) => option.value === formData.itiGraduationYear
+                ) || null
+              }
               name="itiGraduationYear"
-              value={formData.itiGraduationYear}
-              placeholder="Enter your ITI graduation year"
-              onChange={(e) => handleInputChange(e, setFormData)}
-              onBlur={(e) => handleBlur(e)}
+              placeholder="Select your ITI graduation year"
               required
               errorMessage={formErrors.itiGraduationYear}
-              type="Number"
             />
           </div>
 
@@ -197,9 +216,7 @@ const StepEducationDetails = ({
             <SelectComponent
               options={optionsProgram}
               label="Program"
-              onChange={(selectedOption) =>
-                handleSelectChange(selectedOption, "program", setFormData)
-              }
+              onChange={handleProgramChange}
               onBlur={() => handleSelectBlur("program", formData.program)}
               value={
                 optionsProgram?.find(
